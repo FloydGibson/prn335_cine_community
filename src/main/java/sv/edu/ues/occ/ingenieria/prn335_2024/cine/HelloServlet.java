@@ -1,5 +1,5 @@
 package sv.edu.ues.occ.ingenieria.prn335_2024.cine;
-//un saludo mi gente
+//un saludo pibes
 import java.io.*;
 
 import jakarta.servlet.http.*;

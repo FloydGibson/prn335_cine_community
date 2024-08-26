@@ -1,5 +1,5 @@
 package sv.edu.ues.occ.ingenieria.prn335_2024.cine;
-//un saludo pibes, esta es la branch de clase
+//un saludo pibes, esta es la branch de master
 import java.io.*;
 
 import jakarta.servlet.http.*;

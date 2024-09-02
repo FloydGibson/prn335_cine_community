@@ -34,7 +34,7 @@
     <!-- Default SSL configuration enables trust for default certificates from the Java runtime -->
     <ssl id="defaultSSLConfig" trustDefaultCerts="true" />
     <dataSource id="CineDataSource"
-                jndiName="jdbc/pgdb"
+                jndiName="jdbc/cine"
                 jdbcDriverRef="postgresql-driver"
                 type="javax.sql.ConnectionPoolDataSource"
                 transactional="true">

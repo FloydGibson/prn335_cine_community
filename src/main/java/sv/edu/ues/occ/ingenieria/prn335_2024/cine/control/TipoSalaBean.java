@@ -8,14 +8,16 @@ import sv.edu.ues.occ.ingenieria.prn335_2024.cine.entity.TipoSala;
 
 import java.util.List;
 import java.io.Serializable;
+
 @Stateless
 @LocalBean
 public class TipoSalaBean implements Serializable {
-    @PersistenceContext
+    @PersistenceContext(unitName = "CinePU")
     EntityManager em;
 
-    public list<TipoSala> findById(final Integer idTipoSala);{
-        em.find();
+    public TipoSala findById(final Integer idTipoSala){
+
+        return em.find(TipoSala.class, idTipoSala);
     }
 
 

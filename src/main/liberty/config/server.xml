@@ -39,13 +39,12 @@
                 jdbcDriverRef="postgresql-driver"
                 type="javax.sql.ConnectionPoolDataSource"
                 transactional="true">
-    </dataSource>
     <properties serverName="localhost"
                 databaseName="cine_prn335"
                 portNumber="5432"
                 user="postgres"
                 password="1234"/>
-
+    </dataSource>
 
 
 </server>

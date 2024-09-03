@@ -1,5 +1,5 @@
 package sv.edu.ues.occ.ingenieria.prn335_2024.cine.entity;
-
+//losiento
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

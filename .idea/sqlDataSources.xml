@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DdlMappings">
+    <mapping uuid="cedabf92-cc63-4832-a866-45f2a3e3e7a2" name="cine_prn335@localhost Mapping">
+      <data-sources db="f7344056-21f9-40ec-83d4-9d25e03df1dd" ddl="d32a4fdb-edca-4389-99e8-11db387d695a" />
+      <scope>
+        <node kind="database" qname="cine_prn335" />
+      </scope>
+    </mapping>
+  </component>
+</project>

@@ -1,5 +1,5 @@
 package sv.edu.ues.occ.ingenieria.prn335_2024.cine;
-//MASTER
+//mapeo de entidades
 import java.io.*;
 
 import jakarta.inject.Inject;

@@ -1,0 +1,18 @@
+Subject: [PATCH] cambios hechos en clase, pendiente a completar TipoSalaBean hacer cambios al server xml y a la entity de TipoSala, revisar como arreglar el error de la linea 22 del server.xml
+---
+Index: src/main/java/sv/edu/ues/occ/ingenieria/prn335_2024/cine/entity/TipoSala.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/sv/edu/ues/occ/ingenieria/prn335_2024/cine/entity/TipoSala.java b/src/main/java/sv/edu/ues/occ/ingenieria/prn335_2024/cine/entity/TipoSala.java
+--- a/src/main/java/sv/edu/ues/occ/ingenieria/prn335_2024/cine/entity/TipoSala.java	(revision 1241d31ee9376d36d6bea6944bee434370929dc5)
++++ b/src/main/java/sv/edu/ues/occ/ingenieria/prn335_2024/cine/entity/TipoSala.java	(revision 936ac6d49dfa2b4174b39bdd80dfe867c7950106)
+@@ -9,6 +9,7 @@
+ @Table(name = "tipo_sala")
+ public class TipoSala {
+     @Id
++    @Column(name = "id_tipo_sala")
+     protected Integer idTipoSala;
+     @Column(name = "nombre", length = 155)
+     protected String nombre;

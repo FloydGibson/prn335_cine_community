@@ -15,12 +15,31 @@ public class TipoSalaBean implements Serializable {
     @PersistenceContext(unitName = "CinePU")
     EntityManager em;
 
-    public TipoSala findById(final Integer idTipoSala){
+    /**
+     * Busca un TipoSala en el repo por su ID
+     * @param idTipoSala, identificador del tipo sala
+     * @return Nulo si no lo encuentra o el objeto encontrado
+     * @throws IllegalArgumentException si el ID pasado es nulo o menor a cer
+     * @throws IllegalStateException Si hay un problema con el repo
+     */
 
+    public TipoSala findById(final Integer idTipoSala){
+if (idTipoSala == null||idTipoSala<=0){
+    throw new IllegalArgumentException("idTipoSala invalido");
+}
+        try{
+    if (idTipoSala == null){
+        throw new IllegalStateException("Error al acceder al repositorio");
+    }
+
+} catch (Exception ex) {
+    throw new IllegalStateException("Error al acceder al repositorio",ex);
+}
         return em.find(TipoSala.class, idTipoSala);
     }
 
 
-
-
+    public int sumar(int primero, int segundo) {
+        return primero + segundo;
+    }
 }

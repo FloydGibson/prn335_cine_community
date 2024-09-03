@@ -20,6 +20,13 @@ public class TipoSala {
     @Column(name = "expresion_regular")
     protected String expresionRegular;
 
+    public TipoSala() {
+    }
+
+    public TipoSala(Integer idTipoSala) {
+        this.idTipoSala = idTipoSala;
+    }
+
     public void setIdTipoSala(Integer idTipoSala) {
         this.idTipoSala = idTipoSala;
     }

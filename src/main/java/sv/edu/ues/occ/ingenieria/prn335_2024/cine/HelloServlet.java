@@ -1,5 +1,5 @@
 package sv.edu.ues.occ.ingenieria.prn335_2024.cine;
-//hey, esta es la branch de clase, ayuda
+//MASTER
 import java.io.*;
 
 import jakarta.inject.Inject;

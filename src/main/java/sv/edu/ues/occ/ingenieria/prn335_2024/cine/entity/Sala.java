@@ -3,9 +3,14 @@ package sv.edu.ues.occ.ingenieria.prn335_2024.cine.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 
+import java.util.Set;
+
 @Entity
 @Table(name = "sala")
 public class Sala {
+
+
+
     @Id
     @Column(name = "id_sala", nullable = false)
     private Integer id;
@@ -13,6 +18,16 @@ public class Sala {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_sucursal")
     private Sucursal idSucursal;
+
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "idSala")
+    private Set<SalaCaracteristica> SalaCaracteristica;
+
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "idSala")
+    private Set<Programacion> Programacion;
+
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "idSala")
+    private Set<Asiento> Asiento;
+
 
     @Size(max = 155)
     @Column(name = "nombre", length = 155)
@@ -24,6 +39,8 @@ public class Sala {
     @Lob
     @Column(name = "observaciones")
     private String observaciones;
+
+
 
     public Integer getId() {
         return id;

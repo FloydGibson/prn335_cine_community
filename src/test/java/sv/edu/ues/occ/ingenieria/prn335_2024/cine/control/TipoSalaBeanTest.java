@@ -15,6 +15,11 @@ class TipoSalaBeanTest {
         final Integer idEsperado = 1;
         TipoSala esperado= new TipoSala();
         TipoSalaBean cut = new TipoSalaBean();
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            cut.findById(idEsperado);
+        });
+
         EntityManager mock= Mockito.mock(EntityManager.class);
         Mockito.when(mock.find(TipoSala.class, idEsperado)).thenReturn(esperado);
         cut.em=mock;
@@ -23,19 +28,19 @@ class TipoSalaBeanTest {
 
         assertNotNull(resultado);
         assertEquals(esperado,resultado);
-        //fail("Not yet implemented");
+
+        assertThrows(IllegalArgumentException.class, ()->{
+
+
+                cut.findById(null);
+    });
+
+
+        fail("Not yet implemented");
+
     }
-@Test
-    void sumar()   {
-        System.out.println("TipoSalaBeanTest.sumar");
-        int primero=1;
-        int segundo=2;
-        int esperado=3;
-        int resultado=-1;
-        //cut: Class Under Test
-        TipoSalaBean cut = new TipoSalaBean();
-        resultado=cut.sumar(primero,segundo);
-        assertEquals(esperado,resultado);
-        //fail("Not yet implemented");
-    }
+
+
+
+
 }

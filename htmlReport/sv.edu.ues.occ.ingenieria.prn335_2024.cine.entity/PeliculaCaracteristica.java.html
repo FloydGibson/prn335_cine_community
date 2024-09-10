@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PeliculaCaracteristica.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jacoco.exec</a> &gt; <a href="index.source.html" class="el_package">sv.edu.ues.occ.ingenieria.prn335_2024.cine.entity</a> &gt; <span class="el_source">PeliculaCaracteristica.java</span></div><h1>PeliculaCaracteristica.java</h1><pre class="source lang-java linenums">package sv.edu.ues.occ.ingenieria.prn335_2024.cine.entity;
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = &quot;pelicula_caracteristica&quot;)
+<span class="nc" id="L7">public class PeliculaCaracteristica {</span>
+    @Id
+    @Column(name = &quot;id_pelicula_caracteristica&quot;, nullable = false)
+    private Long id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = &quot;id_tipo_pelicula&quot;)
+    private TipoPelicula idTipoPelicula;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = &quot;id_pelicula&quot;)
+    private Pelicula idPelicula;
+
+    @Lob
+    @Column(name = &quot;valor&quot;)
+    private String valor;
+
+    public Long getId() {
+<span class="nc" id="L25">        return id;</span>
+    }
+
+    public void setId(Long id) {
+<span class="nc" id="L29">        this.id = id;</span>
+<span class="nc" id="L30">    }</span>
+
+    public TipoPelicula getIdTipoPelicula() {
+<span class="nc" id="L33">        return idTipoPelicula;</span>
+    }
+
+    public void setIdTipoPelicula(TipoPelicula idTipoPelicula) {
+<span class="nc" id="L37">        this.idTipoPelicula = idTipoPelicula;</span>
+<span class="nc" id="L38">    }</span>
+
+    public Pelicula getIdPelicula() {
+<span class="nc" id="L41">        return idPelicula;</span>
+    }
+
+    public void setIdPelicula(Pelicula idPelicula) {
+<span class="nc" id="L45">        this.idPelicula = idPelicula;</span>
+<span class="nc" id="L46">    }</span>
+
+    public String getValor() {
+<span class="nc" id="L49">        return valor;</span>
+    }
+
+    public void setValor(String valor) {
+<span class="nc" id="L53">        this.valor = valor;</span>
+<span class="nc" id="L54">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

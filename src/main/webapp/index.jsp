@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>JSP - ola culeros</title>
+    <title>JSP - Proyecto</title>
 </head>
 <body>
 <h1><%= "Hello World!" %>

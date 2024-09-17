@@ -8,7 +8,7 @@ import jakarta.validation.constraints.Size;
 public class TipoAsiento {
     @Id
     @Column(name = "id_tipo_asiento", nullable = false)
-    private Integer id;
+    private Integer idTipoAsiento;
 
     @Size(max = 155)
     @Column(name = "nombre", length = 155)
@@ -25,12 +25,12 @@ public class TipoAsiento {
     @Column(name = "expresion_regular")
     private String expresionRegular;
 
-    public Integer getId() {
-        return id;
+    public Integer getIdTipoAsiento() {
+        return idTipoAsiento;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdTipoAsiento(Integer id) {
+        this.idTipoAsiento = id;
     }
 
     public String getNombre() {

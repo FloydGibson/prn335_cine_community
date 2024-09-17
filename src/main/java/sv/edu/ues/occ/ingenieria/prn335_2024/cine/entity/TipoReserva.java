@@ -8,7 +8,7 @@ import jakarta.validation.constraints.Size;
 public class TipoReserva {
     @Id
     @Column(name = "id_tipo_reserva", nullable = false)
-    private Integer id;
+    private Integer idTipoReserva;
 
     @Size(max = 155)
     @Column(name = "nombre", length = 155)
@@ -21,12 +21,12 @@ public class TipoReserva {
     @Column(name = "comentarios")
     private String comentarios;
 
-    public Integer getId() {
-        return id;
+    public Integer getIdTipoReserva() {
+        return idTipoReserva;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdTipoReserva(Integer id) {
+        this.idTipoReserva = id;
     }
 
     public String getNombre() {

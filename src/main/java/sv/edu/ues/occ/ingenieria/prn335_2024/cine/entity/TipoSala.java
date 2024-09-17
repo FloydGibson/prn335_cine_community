@@ -1,15 +1,13 @@
 package sv.edu.ues.occ.ingenieria.prn335_2024.cine.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "tipo_sala")
 public class TipoSala {
     @Id
-    @Column(name = "id_tipo_sala")
+    @Column(name = "id_tipo_sala", nullable=false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     protected Integer idTipoSala;
     @Column(name = "nombre", length = 155)
     protected String nombre;

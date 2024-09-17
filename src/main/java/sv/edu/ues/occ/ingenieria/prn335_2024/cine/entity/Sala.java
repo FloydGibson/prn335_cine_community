@@ -6,14 +6,20 @@ import jakarta.validation.constraints.Size;
 import java.util.Set;
 
 @Entity
-@Table(name = "sala")
+@Table(name = "sala", schema = "public")
+@NamedQueries({
+        @NamedQuery(name="Sala.findByIdTipoSala",
+                query="SELECT s FROM SalaCaracteristica sc JOIN sc.idSala s WHERE sc.idTipoSala.idTipoSala = :idTipoSala GROUP BY s.idSala ORDER BY s.nombre ASC ")
+})
+
+
 public class Sala {
 
 
 
     @Id
     @Column(name = "id_sala", nullable = false)
-    private Integer id;
+    private Integer idSala;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_sucursal")
@@ -40,14 +46,16 @@ public class Sala {
     @Column(name = "observaciones")
     private String observaciones;
 
-
-
-    public Integer getId() {
-        return id;
+    public Sala(Integer idSala) {
+        this.idSala = idSala;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public Integer getIdSala() {
+        return idSala;
+    }
+
+    public void setIdSala(Integer id) {
+        this.idSala = id;
     }
 
     public Sucursal getIdSucursal() {

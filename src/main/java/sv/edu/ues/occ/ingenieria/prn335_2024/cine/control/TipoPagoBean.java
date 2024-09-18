@@ -1,24 +1,31 @@
+/*package sv.edu.ues.occ.ingenieria.prn335_2024.cine.control;
+
+public class TipoPagoBean {
+}
+ */
+//Lo de arriba borralo
+
 package sv.edu.ues.occ.ingenieria.prn335_2024.cine.control;
 
 import jakarta.ejb.LocalBean;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import sv.edu.ues.occ.ingenieria.prn335_2024.cine.entity.TipoSala;
+import sv.edu.ues.occ.ingenieria.prn335_2024.cine.entity.TipoPago;
 
 import java.io.Serializable;
 
 @Stateless
 @LocalBean
-public class TipoSalaBean extends AbstractDataPersist<TipoSala> implements Serializable {
+public class TipoPagoBean extends AbstractDataPersist<TipoPago> implements Serializable {
 
     @PersistenceContext(unitName = "CinePU")
     EntityManager em;
 
 
-public TipoSalaBean() {
-    super(TipoSala.class);
-}
+    public TipoPagoBean() {
+        super(TipoPago.class);
+    }
 
     @Override
     public EntityManager getEntityManager() {

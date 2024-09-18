@@ -12,7 +12,6 @@ public abstract class AbstractDataPersist<T> {
 
 public abstract EntityManager getEntityManager();
 
-
 Class tipoDatos;
 public AbstractDataPersist(Class tipoDatos){
     this.tipoDatos = tipoDatos;

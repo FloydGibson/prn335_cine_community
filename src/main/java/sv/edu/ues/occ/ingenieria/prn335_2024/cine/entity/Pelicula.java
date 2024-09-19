@@ -8,6 +8,7 @@ import jakarta.validation.constraints.Size;
 public class Pelicula {
     @Id
     @Column(name = "id_pelicula", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Size(max = 255)

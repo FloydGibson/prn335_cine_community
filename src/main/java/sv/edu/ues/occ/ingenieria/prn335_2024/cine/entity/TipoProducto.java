@@ -8,6 +8,7 @@ import jakarta.validation.constraints.Size;
 public class TipoProducto {
     @Id
     @Column(name = "id_tipo_producto", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Size(max = 155)

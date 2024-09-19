@@ -10,6 +10,7 @@ import jakarta.validation.constraints.Size;
 
     @Id
     @Column(name = "id_asiento", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -8,6 +8,7 @@ import jakarta.validation.constraints.Size;
 public class Producto {
     @Id
     @Column(name = "id_producto", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)

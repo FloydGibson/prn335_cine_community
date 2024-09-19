@@ -9,6 +9,7 @@ import java.time.OffsetDateTime;
 public class Programacion {
     @Id
     @Column(name = "id_programacion", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 public class AsientoCaracteristica {
     @Id
     @Column(name = "id_asiento_caracteristica", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)

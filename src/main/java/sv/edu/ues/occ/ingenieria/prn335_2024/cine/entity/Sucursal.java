@@ -8,6 +8,7 @@ import jakarta.validation.constraints.Size;
 public class Sucursal {
     @Id
     @Column(name = "id_sucursal", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Size(max = 155)

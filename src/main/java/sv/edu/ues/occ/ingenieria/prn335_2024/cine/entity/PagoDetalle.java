@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 public class PagoDetalle {
     @Id
     @Column(name = "id_pago_detalle", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)

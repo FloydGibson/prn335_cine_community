@@ -10,6 +10,7 @@ import java.time.OffsetDateTime;
 public class Factura {
     @Id
     @Column(name = "id_factura", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Size(max = 255)

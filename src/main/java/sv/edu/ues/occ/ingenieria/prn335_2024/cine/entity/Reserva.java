@@ -10,6 +10,7 @@ import java.time.OffsetDateTime;
 public class Reserva {
     @Id
     @Column(name = "id_reserva", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)

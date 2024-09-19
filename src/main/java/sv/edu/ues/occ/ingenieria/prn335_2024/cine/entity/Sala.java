@@ -19,6 +19,7 @@ public class Sala {
 
     @Id
     @Column(name = "id_sala", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idSala;
 
     @ManyToOne(fetch = FetchType.LAZY)

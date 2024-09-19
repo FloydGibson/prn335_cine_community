@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TipoSalaServlet.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jacoco.exec</a> &gt; <a href="index.source.html" class="el_package">sv.edu.ues.occ.ingenieria.prn335_2024.cine.boundary.servlet</a> &gt; <span class="el_source">TipoSalaServlet.java</span></div><h1>TipoSalaServlet.java</h1><pre class="source lang-java linenums">package sv.edu.ues.occ.ingenieria.prn335_2024.cine.boundary.servlet;
+
+import jakarta.inject.Inject;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import sv.edu.ues.occ.ingenieria.prn335_2024.cine.control.TipoSalaBean;
+import sv.edu.ues.occ.ingenieria.prn335_2024.cine.entity.TipoSala;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+
+
+@WebServlet(name = &quot;TipoSalaServlet&quot;, urlPatterns = &quot;TipoSala&quot;)
+<span class="nc" id="L18">public class TipoSalaServlet extends HttpServlet {</span>
+
+    @Inject
+    TipoSalaBean tsBean;
+
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+<span class="nc" id="L26">        resp.setContentType(&quot;text/html&quot;);</span>
+<span class="nc" id="L27">        PrintWriter out = resp.getWriter();</span>
+<span class="nc bnc" id="L28" title="All 2 branches missed.">        if (req.getParameter(&quot;nombre&quot;) != null) {</span>
+<span class="nc" id="L29">            TipoSala nuevo = new TipoSala();</span>
+<span class="nc" id="L30">            nuevo.setNombre(req.getParameter(&quot;nombre&quot;));</span>
+<span class="nc" id="L31">            nuevo.setActivo(Boolean.valueOf(req.getParameter(&quot;activo&quot;)));</span>
+<span class="nc" id="L32">            nuevo.setComentarios(req.getParameter(&quot;comentarios&quot;));</span>
+<span class="nc" id="L33">            nuevo.setExpresionRegular(req.getParameter(&quot;expresionRegular&quot;));</span>
+            try {
+<span class="nc" id="L35">                tsBean.create(nuevo);</span>
+<span class="nc" id="L36">                out.println(&quot;&lt;html&gt;&quot;);</span>
+<span class="nc" id="L37">                out.println(&quot;&lt;body&gt;&quot;);</span>
+<span class="nc" id="L38">                out.println(&quot;&lt;h1&gt;Tipo de Sala&lt;/h1&gt;&quot;);</span>
+<span class="nc" id="L39">                out.println(&quot;&lt;hr&gt;&quot;);</span>
+<span class="nc" id="L40">                out.println(&quot;Tipo Sala guardado correctamente&quot; + nuevo.getIdTipoSala());</span>
+<span class="nc" id="L41">                out.println(&quot;&lt;/body&gt;&quot;);</span>
+<span class="nc" id="L42">                out.println(&quot;&lt;/html&gt;&quot;);</span>
+<span class="nc" id="L43">                return;</span>
+<span class="nc" id="L44">            } catch (Exception e) {</span>
+<span class="nc" id="L45">                e.printStackTrace();</span>
+<span class="nc" id="L46">                resp.setStatus(500);</span>
+<span class="nc" id="L47">                return;</span>
+            }
+        }
+<span class="nc" id="L50">        resp.setStatus(HttpServletResponse.SC_PRECONDITION_FAILED);</span>
+
+<span class="nc" id="L52">    }</span>
+
+
+
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

@@ -32,34 +32,33 @@ void create(){
     //fail("Not yet implemented");
 }
   @Test
-    void findById() {
-        System.out.println("TipoSalaBeanTest.findById");
-        final Integer idEsperado = 1;
-        TipoSala esperado= new TipoSala();
-        TipoSalaBean cut = new TipoSalaBean();
-
-        EntityManager mock= mock(EntityManager.class);
-        Mockito.when(mock.find(TipoSala.class, idEsperado)).thenReturn(esperado);
-        cut.em=mock;
-
-        TipoSala resultado= cut.findById(idEsperado);
-
-        assertNotNull(resultado);
-        assertEquals(esperado,resultado);
+    void findById() throws IllegalArgumentException {
+      System.out.println("TipoSalaBeanTest.findById()");
+      final Integer idEsperado = 1;
+      TipoSala esperado = new TipoSala(idEsperado);
+      TipoSalaBean cut = new TipoSalaBean();
 
 
-      assertThrows(IllegalArgumentException.class, () -> {
+      assertThrows(IllegalStateException.class, () -> {
           cut.findById(idEsperado);
       });
 
+      EntityManager mock = Mockito.mock(EntityManager.class);
+      Mockito.when(mock.find(TipoSala.class, idEsperado)).thenReturn(esperado);
+      cut.em = mock;
 
-        assertThrows(IllegalArgumentException.class, ()->{
-                cut.findById(null);
-    });
+      TipoSala resultado = cut.findById(idEsperado);
 
-    }
+      assertNotNull(resultado);
+      assertEquals(esperado, resultado);
+
+      assertThrows(IllegalArgumentException.class, () -> {
+          cut.findById(null);
+      });
 
 
+      //fail("Not yet implemented");
 
 
+  }
 }

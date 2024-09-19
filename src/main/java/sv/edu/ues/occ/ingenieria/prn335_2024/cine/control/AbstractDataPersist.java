@@ -67,24 +67,6 @@ public AbstractDataPersist(Class tipoDatos){
 }
 
     public List<T> findRange(int first, int max) throws IllegalArgumentException, IllegalStateException {
-        //REFACTORIZAR
-
-        //Necesito criterialBuilder para crear queries a eso le voy a decir que quiero crear un criterial query
-        //
-        EntityManager em = null;
-
-        if (first < 0 || max < 0) {
-            throw new IllegalArgumentException("Parametro no válido: first or max");
-        }
-
-        try {
-            em = getEntityManager();
-            if (em == null) {
-                throw new IllegalStateException("Error al acceder al repositorio");
-            }
-        } catch (Exception ex) {
-            throw new IllegalStateException("Error al acceder al repositorio de Tipo", ex);
-        }
         CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
         CriteriaQuery q = cb.createQuery(tipoDatos);
         Root<T> raiz = q.from(tipoDatos);

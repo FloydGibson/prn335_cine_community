@@ -39,7 +39,7 @@ void create(){
       TipoSalaBean cut = new TipoSalaBean();
 
 
-      assertThrows(IllegalStateException.class, () -> {
+      assertThrows(IllegalStateException.class,()-> {
           cut.findById(idEsperado);
       });
 
@@ -50,7 +50,7 @@ void create(){
       TipoSala resultado = cut.findById(idEsperado);
 
       assertNotNull(resultado);
-      assertEquals(esperado, resultado);
+      assertEquals(esperado,resultado);
 
       assertThrows(IllegalArgumentException.class, () -> {
           cut.findById(null);
@@ -60,5 +60,6 @@ void create(){
       //fail("Not yet implemented");
 
 
-  }
+
+      }
 }

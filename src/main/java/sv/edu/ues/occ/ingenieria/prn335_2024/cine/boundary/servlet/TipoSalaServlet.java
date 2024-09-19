@@ -37,7 +37,7 @@ public class TipoSalaServlet extends HttpServlet {
                 out.println("<body>");
                 out.println("<h1>Tipo de Sala</h1>");
                 out.println("<hr>");
-                out.println("Tipo de Sala guardado correctamente" + nuevo.getIdTipoSala());
+                out.println("Tipo Sala guardado correctamente" + nuevo.getIdTipoSala());
                 out.println("</body>");
                 out.println("</html>");
                 return;

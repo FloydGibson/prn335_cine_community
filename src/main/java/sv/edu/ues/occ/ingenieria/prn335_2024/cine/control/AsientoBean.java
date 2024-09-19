@@ -12,13 +12,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-public class AsientoBean extends AbstractDataPersist<Asiento> implements Serializable {
+@Stateless
+@LocalBean
 
+public class AsientoBean extends AbstractDataPersist<Asiento> implements Serializable{
     @PersistenceContext(unitName = "CinePU")
     EntityManager em;
 
     public AsientoBean() {
-        super(Asiento.class);
+        super(Pago.class);
     }
 
     @Override
@@ -26,21 +28,4 @@ public class AsientoBean extends AbstractDataPersist<Asiento> implements Seriali
         return em;
     }
 
-    public List<Asiento> findByIdSala(Long idSala, int first, int max) {
-        if (idSala != null && first >= 0 && max > 0) {
-            try {
-                if (em != null) {
-                    Query q = em.createNamedQuery("Asiento.findByIdSala");
-                    q.setParameter("idSala", idSala);
-                    q.setFirstResult(first);
-                    q.setMaxResults(max);
-                    return q.getResultList();
-                }
-
-            } catch (Exception e) {
-                Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
-            }
-        }
-        return Collections.emptyList();
-    }
 }

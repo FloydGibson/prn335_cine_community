@@ -4,8 +4,10 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 
 @Entity
-@Table(name = "asiento")
-public class Asiento {
+@Table(name = "Asiento")
+
+                public class Asiento {
+
     @Id
     @Column(name = "id_asiento", nullable = false)
     private Long id;

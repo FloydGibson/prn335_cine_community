@@ -46,9 +46,13 @@ public class Sala {
     @Column(name = "observaciones")
     private String observaciones;
 
-    public Sala(Integer idSala) {
-        this.idSala = idSala;
+    public Sala() {
+
     }
+
+    public Sala(int i) {
+    }
+
 
     public Integer getIdSala() {
         return idSala;

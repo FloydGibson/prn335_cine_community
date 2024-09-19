@@ -39,7 +39,7 @@ void create(){
 <span class="fc" id="L39">      TipoSalaBean cut = new TipoSalaBean();</span>
 
 
-<span class="fc" id="L42">      assertThrows(IllegalStateException.class, () -&gt; {</span>
+<span class="fc" id="L42">      assertThrows(IllegalStateException.class,()-&gt; {</span>
 <span class="nc" id="L43">          cut.findById(idEsperado);</span>
 <span class="nc" id="L44">      });</span>
 
@@ -50,7 +50,7 @@ void create(){
 <span class="fc" id="L50">      TipoSala resultado = cut.findById(idEsperado);</span>
 
 <span class="fc" id="L52">      assertNotNull(resultado);</span>
-<span class="fc" id="L53">      assertEquals(esperado, resultado);</span>
+<span class="fc" id="L53">      assertEquals(esperado,resultado);</span>
 
 <span class="fc" id="L55">      assertThrows(IllegalArgumentException.class, () -&gt; {</span>
 <span class="nc" id="L56">          cut.findById(null);</span>
@@ -60,6 +60,7 @@ void create(){
       //fail(&quot;Not yet implemented&quot;);
 
 
-<span class="fc" id="L63">  }</span>
+
+<span class="fc" id="L64">      }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

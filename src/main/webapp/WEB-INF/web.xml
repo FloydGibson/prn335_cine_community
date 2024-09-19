@@ -5,13 +5,13 @@
          version="6.0">
 
     <servlet>
-        <servlet-name>Faces Servlet</servlet-name>
-        <servlet-class>jakarta.faces.webapp.FacesServlet</servlet-class>
+        <servlet-name>FacesServlet</servlet-name>
+        <servlet-class>jakarta.faces.webapp.FacesServlet</servlet-class><!-- Gestiona el ciclo de vida, me preocupo por el modelo y la vista
+        Esta es la parte de C en MVC-->
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
-        <servlet-name>Faces Servlet</servlet-name>
-        <url-pattern>*.jsf</url-pattern>
+        <servlet-name>FacesServlet</servlet-name>
+        <url-pattern>*.jsf</url-pattern><!-- Todo lo que termine en jsf mandalo a servlet-->
     </servlet-mapping>
-
 </web-app>

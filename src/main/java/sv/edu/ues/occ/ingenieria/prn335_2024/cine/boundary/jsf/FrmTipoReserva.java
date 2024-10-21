@@ -27,15 +27,6 @@ LazyDataModel<TipoReserva> modelo;
         @Override
         public int count(Map<String, FilterMeta> map) {
             return 0;
-        try{
-            return dataBean.count().intValue();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return 0;
-
-
-
 
         }
 

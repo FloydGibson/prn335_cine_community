@@ -5,19 +5,14 @@
   Date: 17/9/24
   Time: 10:22
 -->
-<!DOCTYPE html
-        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"><!-- Espacion de nombres: Importar una librería
+      xmlns:h="http://xmlns.jcp.org/jsf/html"><!-- Espacion de nombres: Importar una librería
       con h: puedo usar los componentes que están en esa librería-->
 
 <h:head>
 
     <title>Tipo Sala</title>
-    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
     <style type="text/css">
         body{
             background: #8f79de;
@@ -81,14 +76,26 @@
                 <h:outputText value="#{r.comentarios} "/>
             </h:column>
             <h:column>
-                <h:commandButton value="Seleccionar" actionListener="#{frmTipoSala.btnSeleccionarRegistroHandler}"/>
+                <h:commandButton value="Seleccionar" action="#{frmTipoSala.btnSeleccionarRegistroHandler(idTipoSala)}"/>
             </h:column>
 
         </h:dataTable>
-    </h:form>
-    <h:panelGroup>
 
-    </h:panelGroup>
+<h:panelGroup>
+    <h:form>
+
+
+
+
+    </h:form>
+
+
+</h:panelGroup>
+
+
+
+
+
     <h:panelGrid columns="2" rendered="#{not empty frmTipoSala.registro}">
         <h:outputLabel value="ID" for="txtId"/>
         <h:inputText id="txtId" value = "#{frmTipoSala.registro.idTipoSala}" readonly="true" disabled="id"/>
@@ -101,6 +108,11 @@
         <h:outputLabel for="txtComentarios" value="Comentarios"/>
         <h:outputText id="txtComentarios" value="#{frmTipoSala.registro.comentarios}"/>
     </h:panelGrid>
+<h:panelGrid>
+    <h:messages></h:messages>
+
+
+</h:panelGrid>
 
 </h:body>
 

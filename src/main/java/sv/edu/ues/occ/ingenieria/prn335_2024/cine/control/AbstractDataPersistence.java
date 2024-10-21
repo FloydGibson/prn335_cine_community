@@ -59,7 +59,7 @@ public abstract class AbstractDataPersistence<T> {
     public T update(T entity) throws IllegalStateException, IllegalArgumentException {
         EntityManager em = null;
         if (entity == null) {
-            throw new IllegalArgumentException("La entidad no puede ser nula");
+            throw new IllegalArgumentException("Entidad nula");
         }
         try {
             em = getEntityManager();
@@ -137,11 +137,11 @@ public abstract class AbstractDataPersistence<T> {
             }
 
             CriteriaBuilder cb = em.getCriteriaBuilder();
-            CriteriaQuery<Long> cq = cb.createQuery(Long.class);
-            Root<T> raiz = cq.from(tipoDatos);
-            cq.select(cb.count(raiz));
+            CriteriaQuery<Long> q = cb.createQuery(Long.class);
+            Root<T> raiz = q.from(tipoDatos);
+            q.select(cb.count(raiz));
 
-            TypedQuery<Long> query = em.createQuery(cq);
+            TypedQuery<Long> query = em.createQuery(q);
             return query.getSingleResult();
 
         } catch (Exception e) {

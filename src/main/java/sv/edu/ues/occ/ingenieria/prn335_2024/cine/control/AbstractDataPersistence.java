@@ -20,13 +20,6 @@ public abstract class AbstractDataPersistence<T> {
     }
 
 
-    /*
-      Almacena el registro en el repositorio
-      param entity registro a almacenar
-      ex1 acces no se puede acceder al repo
-      Argument si el registro es nulo
-      Generar javadoc?
-       */
     public void create(T entity) throws IllegalArgumentException, IllegalStateException {
 
         EntityManager em = null;
@@ -39,7 +32,7 @@ public abstract class AbstractDataPersistence<T> {
         try {
             em.persist(entity);
         } catch (Exception e) {
-            // excepcion java lang, no requiere la dependencia
+
             throw new IllegalStateException("Error acceder repositorio", e);
         }
     }
@@ -55,7 +48,7 @@ public abstract class AbstractDataPersistence<T> {
             if (em == null) {
                 throw new IllegalStateException("Error al acceder al repositorio");
             }
-            //T managedEntity = em.merge(entity);
+
             em.remove(entity);
         } catch (Exception e) {
             throw new IllegalStateException("Error al acceder al repositorio", e);
@@ -95,17 +88,16 @@ public abstract class AbstractDataPersistence<T> {
         } catch (Exception ex) {
             throw new IllegalStateException("No se encontró el entity manager", ex);
         }
-        //return em.find(TipoSala.class,id);
-        // return (TipoDatos) em.find(tipoDatos,id);
+
 
         return (T) em.find(tipoDatos, idTipo);
 
-        //return em.find(tipoDatos,id);
+
 
     }
 
     public List<T> findRange(int min, int max) {
-        // validacion
+
         if (min < 0 || max < 0) {
             throw new IllegalArgumentException("Ambos parametros tienen que ser positivos.");
         }
@@ -116,13 +108,13 @@ public abstract class AbstractDataPersistence<T> {
             throw new IllegalStateException("El EntityManager no se invoco correctamente.");
         }
 
-        // CriteriaBuilder y CriteriaQuery
+
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<T> q = cb.createQuery(tipoDatos);
         Root<T> raiz = q.from(tipoDatos);
         q.select(raiz);
 
-        // corriendo la query
+
         TypedQuery<T> query = em.createQuery(q);
         query.setFirstResult(min);
         query.setMaxResults(max);
@@ -145,12 +137,12 @@ public abstract class AbstractDataPersistence<T> {
             }
 
             CriteriaBuilder cb = em.getCriteriaBuilder();
-            CriteriaQuery<Long> cq = cb.createQuery(Long.class); // Definir que queremos un resultado de tipo Long
+            CriteriaQuery<Long> cq = cb.createQuery(Long.class);
             Root<T> raiz = cq.from(tipoDatos);
-            cq.select(cb.count(raiz)); // Utilizar el método count
+            cq.select(cb.count(raiz));
 
             TypedQuery<Long> query = em.createQuery(cq);
-            return query.getSingleResult(); // Obtener el resultado único de la consulta
+            return query.getSingleResult();
 
         } catch (Exception e) {
             throw new IllegalStateException("Error al acceder al repositorio", e);

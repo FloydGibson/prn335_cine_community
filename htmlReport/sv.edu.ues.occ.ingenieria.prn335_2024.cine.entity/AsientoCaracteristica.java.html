@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 <span class="nc" id="L7">public class AsientoCaracteristica {</span>
     @Id
     @Column(name = &quot;id_asiento_caracteristica&quot;, nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -22,36 +23,36 @@ import jakarta.persistence.*;
     private String valor;
 
     public Long getId() {
-<span class="nc" id="L25">        return id;</span>
+<span class="nc" id="L26">        return id;</span>
     }
 
     public void setId(Long id) {
-<span class="nc" id="L29">        this.id = id;</span>
-<span class="nc" id="L30">    }</span>
+<span class="nc" id="L30">        this.id = id;</span>
+<span class="nc" id="L31">    }</span>
 
     public Asiento getIdAsiento() {
-<span class="nc" id="L33">        return idAsiento;</span>
+<span class="nc" id="L34">        return idAsiento;</span>
     }
 
     public void setIdAsiento(Asiento idAsiento) {
-<span class="nc" id="L37">        this.idAsiento = idAsiento;</span>
-<span class="nc" id="L38">    }</span>
+<span class="nc" id="L38">        this.idAsiento = idAsiento;</span>
+<span class="nc" id="L39">    }</span>
 
     public TipoAsiento getIdTipoAsiento() {
-<span class="nc" id="L41">        return idTipoAsiento;</span>
+<span class="nc" id="L42">        return idTipoAsiento;</span>
     }
 
     public void setIdTipoAsiento(TipoAsiento idTipoAsiento) {
-<span class="nc" id="L45">        this.idTipoAsiento = idTipoAsiento;</span>
-<span class="nc" id="L46">    }</span>
+<span class="nc" id="L46">        this.idTipoAsiento = idTipoAsiento;</span>
+<span class="nc" id="L47">    }</span>
 
     public String getValor() {
-<span class="nc" id="L49">        return valor;</span>
+<span class="nc" id="L50">        return valor;</span>
     }
 
     public void setValor(String valor) {
-<span class="nc" id="L53">        this.valor = valor;</span>
-<span class="nc" id="L54">    }</span>
+<span class="nc" id="L54">        this.valor = valor;</span>
+<span class="nc" id="L55">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

@@ -9,6 +9,7 @@ import java.time.OffsetDateTime;
 <span class="nc" id="L9">public class Programacion {</span>
     @Id
     @Column(name = &quot;id_programacion&quot;, nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -30,52 +31,52 @@ import java.time.OffsetDateTime;
     private String comentarios;
 
     public Long getId() {
-<span class="nc" id="L33">        return id;</span>
+<span class="nc" id="L34">        return id;</span>
     }
 
     public void setId(Long id) {
-<span class="nc" id="L37">        this.id = id;</span>
-<span class="nc" id="L38">    }</span>
+<span class="nc" id="L38">        this.id = id;</span>
+<span class="nc" id="L39">    }</span>
 
     public Sala getIdSala() {
-<span class="nc" id="L41">        return idSala;</span>
+<span class="nc" id="L42">        return idSala;</span>
     }
 
     public void setIdSala(Sala idSala) {
-<span class="nc" id="L45">        this.idSala = idSala;</span>
-<span class="nc" id="L46">    }</span>
+<span class="nc" id="L46">        this.idSala = idSala;</span>
+<span class="nc" id="L47">    }</span>
 
     public Pelicula getIdPelicula() {
-<span class="nc" id="L49">        return idPelicula;</span>
+<span class="nc" id="L50">        return idPelicula;</span>
     }
 
     public void setIdPelicula(Pelicula idPelicula) {
-<span class="nc" id="L53">        this.idPelicula = idPelicula;</span>
-<span class="nc" id="L54">    }</span>
+<span class="nc" id="L54">        this.idPelicula = idPelicula;</span>
+<span class="nc" id="L55">    }</span>
 
     public OffsetDateTime getDesde() {
-<span class="nc" id="L57">        return desde;</span>
+<span class="nc" id="L58">        return desde;</span>
     }
 
     public void setDesde(OffsetDateTime desde) {
-<span class="nc" id="L61">        this.desde = desde;</span>
-<span class="nc" id="L62">    }</span>
+<span class="nc" id="L62">        this.desde = desde;</span>
+<span class="nc" id="L63">    }</span>
 
     public OffsetDateTime getHasta() {
-<span class="nc" id="L65">        return hasta;</span>
+<span class="nc" id="L66">        return hasta;</span>
     }
 
     public void setHasta(OffsetDateTime hasta) {
-<span class="nc" id="L69">        this.hasta = hasta;</span>
-<span class="nc" id="L70">    }</span>
+<span class="nc" id="L70">        this.hasta = hasta;</span>
+<span class="nc" id="L71">    }</span>
 
     public String getComentarios() {
-<span class="nc" id="L73">        return comentarios;</span>
+<span class="nc" id="L74">        return comentarios;</span>
     }
 
     public void setComentarios(String comentarios) {
-<span class="nc" id="L77">        this.comentarios = comentarios;</span>
-<span class="nc" id="L78">    }</span>
+<span class="nc" id="L78">        this.comentarios = comentarios;</span>
+<span class="nc" id="L79">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

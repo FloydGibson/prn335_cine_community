@@ -8,6 +8,7 @@ import jakarta.validation.constraints.Size;
 <span class="nc" id="L8">public class Producto {</span>
     @Id
     @Column(name = &quot;id_producto&quot;, nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -26,44 +27,44 @@ import jakarta.validation.constraints.Size;
     private String descripcion;
 
     public Long getId() {
-<span class="nc" id="L29">        return id;</span>
+<span class="nc" id="L30">        return id;</span>
     }
 
     public void setId(Long id) {
-<span class="nc" id="L33">        this.id = id;</span>
-<span class="nc" id="L34">    }</span>
+<span class="nc" id="L34">        this.id = id;</span>
+<span class="nc" id="L35">    }</span>
 
     public TipoProducto getIdTipoProducto() {
-<span class="nc" id="L37">        return idTipoProducto;</span>
+<span class="nc" id="L38">        return idTipoProducto;</span>
     }
 
     public void setIdTipoProducto(TipoProducto idTipoProducto) {
-<span class="nc" id="L41">        this.idTipoProducto = idTipoProducto;</span>
-<span class="nc" id="L42">    }</span>
+<span class="nc" id="L42">        this.idTipoProducto = idTipoProducto;</span>
+<span class="nc" id="L43">    }</span>
 
     public String getNombre() {
-<span class="nc" id="L45">        return nombre;</span>
+<span class="nc" id="L46">        return nombre;</span>
     }
 
     public void setNombre(String nombre) {
-<span class="nc" id="L49">        this.nombre = nombre;</span>
-<span class="nc" id="L50">    }</span>
+<span class="nc" id="L50">        this.nombre = nombre;</span>
+<span class="nc" id="L51">    }</span>
 
     public Boolean getActivo() {
-<span class="nc" id="L53">        return activo;</span>
+<span class="nc" id="L54">        return activo;</span>
     }
 
     public void setActivo(Boolean activo) {
-<span class="nc" id="L57">        this.activo = activo;</span>
-<span class="nc" id="L58">    }</span>
+<span class="nc" id="L58">        this.activo = activo;</span>
+<span class="nc" id="L59">    }</span>
 
     public String getDescripcion() {
-<span class="nc" id="L61">        return descripcion;</span>
+<span class="nc" id="L62">        return descripcion;</span>
     }
 
     public void setDescripcion(String descripcion) {
-<span class="nc" id="L65">        this.descripcion = descripcion;</span>
-<span class="nc" id="L66">    }</span>
+<span class="nc" id="L66">        this.descripcion = descripcion;</span>
+<span class="nc" id="L67">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 <span class="nc" id="L9">public class FacturaDetalleSala {</span>
     @Id
     @Column(name = &quot;id_factura_detalle_sala&quot;, nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -23,36 +24,36 @@ import java.math.BigDecimal;
     private BigDecimal monto;
 
     public Long getId() {
-<span class="nc" id="L26">        return id;</span>
+<span class="nc" id="L27">        return id;</span>
     }
 
     public void setId(Long id) {
-<span class="nc" id="L30">        this.id = id;</span>
-<span class="nc" id="L31">    }</span>
+<span class="nc" id="L31">        this.id = id;</span>
+<span class="nc" id="L32">    }</span>
 
     public Factura getIdFactura() {
-<span class="nc" id="L34">        return idFactura;</span>
+<span class="nc" id="L35">        return idFactura;</span>
     }
 
     public void setIdFactura(Factura idFactura) {
-<span class="nc" id="L38">        this.idFactura = idFactura;</span>
-<span class="nc" id="L39">    }</span>
+<span class="nc" id="L39">        this.idFactura = idFactura;</span>
+<span class="nc" id="L40">    }</span>
 
     public ReservaDetalle getIdReservaDetalle() {
-<span class="nc" id="L42">        return idReservaDetalle;</span>
+<span class="nc" id="L43">        return idReservaDetalle;</span>
     }
 
     public void setIdReservaDetalle(ReservaDetalle idReservaDetalle) {
-<span class="nc" id="L46">        this.idReservaDetalle = idReservaDetalle;</span>
-<span class="nc" id="L47">    }</span>
+<span class="nc" id="L47">        this.idReservaDetalle = idReservaDetalle;</span>
+<span class="nc" id="L48">    }</span>
 
     public BigDecimal getMonto() {
-<span class="nc" id="L50">        return monto;</span>
+<span class="nc" id="L51">        return monto;</span>
     }
 
     public void setMonto(BigDecimal monto) {
-<span class="nc" id="L54">        this.monto = monto;</span>
-<span class="nc" id="L55">    }</span>
+<span class="nc" id="L55">        this.monto = monto;</span>
+<span class="nc" id="L56">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

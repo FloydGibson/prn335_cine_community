@@ -19,6 +19,7 @@ public class Sala {
 
     @Id
     @Column(name = &quot;id_sala&quot;, nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idSala;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -46,53 +47,53 @@ public class Sala {
     @Column(name = &quot;observaciones&quot;)
     private String observaciones;
 
-<span class="nc" id="L49">    public Sala() {</span>
+<span class="nc" id="L50">    public Sala() {</span>
 
-<span class="nc" id="L51">    }</span>
+<span class="nc" id="L52">    }</span>
 
-<span class="fc" id="L53">    public Sala(int i) {</span>
-<span class="fc" id="L54">    }</span>
+<span class="fc" id="L54">    public Sala(int i) {</span>
+<span class="fc" id="L55">    }</span>
 
 
     public Integer getIdSala() {
-<span class="nc" id="L58">        return idSala;</span>
+<span class="nc" id="L59">        return idSala;</span>
     }
 
     public void setIdSala(Integer id) {
-<span class="nc" id="L62">        this.idSala = id;</span>
-<span class="nc" id="L63">    }</span>
+<span class="nc" id="L63">        this.idSala = id;</span>
+<span class="nc" id="L64">    }</span>
 
     public Sucursal getIdSucursal() {
-<span class="nc" id="L66">        return idSucursal;</span>
+<span class="nc" id="L67">        return idSucursal;</span>
     }
 
     public void setIdSucursal(Sucursal idSucursal) {
-<span class="nc" id="L70">        this.idSucursal = idSucursal;</span>
-<span class="nc" id="L71">    }</span>
+<span class="nc" id="L71">        this.idSucursal = idSucursal;</span>
+<span class="nc" id="L72">    }</span>
 
     public String getNombre() {
-<span class="nc" id="L74">        return nombre;</span>
+<span class="nc" id="L75">        return nombre;</span>
     }
 
     public void setNombre(String nombre) {
-<span class="nc" id="L78">        this.nombre = nombre;</span>
-<span class="nc" id="L79">    }</span>
+<span class="nc" id="L79">        this.nombre = nombre;</span>
+<span class="nc" id="L80">    }</span>
 
     public Boolean getActivo() {
-<span class="nc" id="L82">        return activo;</span>
+<span class="nc" id="L83">        return activo;</span>
     }
 
     public void setActivo(Boolean activo) {
-<span class="nc" id="L86">        this.activo = activo;</span>
-<span class="nc" id="L87">    }</span>
+<span class="nc" id="L87">        this.activo = activo;</span>
+<span class="nc" id="L88">    }</span>
 
     public String getObservaciones() {
-<span class="nc" id="L90">        return observaciones;</span>
+<span class="nc" id="L91">        return observaciones;</span>
     }
 
     public void setObservaciones(String observaciones) {
-<span class="nc" id="L94">        this.observaciones = observaciones;</span>
-<span class="nc" id="L95">    }</span>
+<span class="nc" id="L95">        this.observaciones = observaciones;</span>
+<span class="nc" id="L96">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

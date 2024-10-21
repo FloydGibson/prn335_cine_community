@@ -8,6 +8,7 @@ import jakarta.validation.constraints.Size;
 <span class="nc" id="L8">public class Pelicula {</span>
     @Id
     @Column(name = &quot;id_pelicula&quot;, nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Size(max = 255)
@@ -19,28 +20,28 @@ import jakarta.validation.constraints.Size;
     private String sinopsis;
 
     public Long getId() {
-<span class="nc" id="L22">        return id;</span>
+<span class="nc" id="L23">        return id;</span>
     }
 
     public void setId(Long id) {
-<span class="nc" id="L26">        this.id = id;</span>
-<span class="nc" id="L27">    }</span>
+<span class="nc" id="L27">        this.id = id;</span>
+<span class="nc" id="L28">    }</span>
 
     public String getNombre() {
-<span class="nc" id="L30">        return nombre;</span>
+<span class="nc" id="L31">        return nombre;</span>
     }
 
     public void setNombre(String nombre) {
-<span class="nc" id="L34">        this.nombre = nombre;</span>
-<span class="nc" id="L35">    }</span>
+<span class="nc" id="L35">        this.nombre = nombre;</span>
+<span class="nc" id="L36">    }</span>
 
     public String getSinopsis() {
-<span class="nc" id="L38">        return sinopsis;</span>
+<span class="nc" id="L39">        return sinopsis;</span>
     }
 
     public void setSinopsis(String sinopsis) {
-<span class="nc" id="L42">        this.sinopsis = sinopsis;</span>
-<span class="nc" id="L43">    }</span>
+<span class="nc" id="L43">        this.sinopsis = sinopsis;</span>
+<span class="nc" id="L44">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

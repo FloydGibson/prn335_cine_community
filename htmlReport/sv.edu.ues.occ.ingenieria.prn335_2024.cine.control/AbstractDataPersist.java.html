@@ -10,90 +10,155 @@ import java.util.List;
 
 public abstract class AbstractDataPersist&lt;T&gt; {
 
-public abstract EntityManager getEntityManager();
+    public abstract EntityManager getEntityManager();
 
-Class tipoDatos;
-<span class="fc" id="L16">public AbstractDataPersist(Class tipoDatos){</span>
-<span class="fc" id="L17">    this.tipoDatos = tipoDatos;</span>
-<span class="fc" id="L18">}</span>
+    Class tipoDatos;
+
+<span class="fc" id="L17">    public AbstractDataPersist(Class tipoDatos) {</span>
+<span class="fc" id="L18">        this.tipoDatos = tipoDatos;</span>
+<span class="fc" id="L19">    }</span>
 
 
-    /**
-     *
-     * @param id Indentificador unico buscado
-     * @return Nulo si no se encuentra o el registro encontrado
-     *
-     */
-    public T findById(final Object id){
-<span class="fc" id="L28">        EntityManager em = null;</span>
-<span class="fc bfc" id="L29" title="All 2 branches covered.">        if (id == null){</span>
-<span class="fc" id="L30">            throw new IllegalArgumentException(&quot;id invalido&quot;);</span>
-        }
-        try{
-<span class="fc" id="L33">            em = getEntityManager();</span>
-<span class="fc bfc" id="L34" title="All 2 branches covered.">            if (em == null){</span>
-<span class="fc" id="L35">                throw new IllegalStateException(&quot;Error al acceder al repositorio&quot;);</span>
-            }
+    /*
+      Almacena el registro en el repositorio
+      param entity registro a almacenar
+      ex1 acces no se puede acceder al repo
+      Argument si el registro es nulo
+      Generar javadoc?
+       */
+    public void create(T entity) throws IllegalArgumentException, IllegalStateException {
 
-<span class="fc" id="L38">        } catch (Exception ex) {</span>
-<span class="fc" id="L39">            throw new IllegalStateException(&quot;Error al acceder al repositorio&quot;,ex);</span>
-<span class="fc" id="L40">        }</span>
-<span class="fc" id="L41">        return (T) em.find(tipoDatos, id);</span>
-    }
+<span class="fc" id="L31">        EntityManager em = null;</span>
+<span class="fc" id="L32">        em = getEntityManager();</span>
 
-    /**
-     *
-     * @param entity
-     * @throws IllegalStateException
-     * @throws IllegalArgumentException
-     */
-    public void create(final T entity) throws IllegalStateException,IllegalArgumentException{
-<span class="fc" id="L51">    EntityManager em = null;</span>
-
-<span class="fc bfc" id="L53" title="All 2 branches covered.">    if (entity == null){</span>
-<span class="fc" id="L54">        throw new IllegalArgumentException(&quot;La entidad a persistir no puede ser nula&quot;);</span>
-    }
-    try {
-<span class="fc" id="L57">        em = getEntityManager();</span>
-<span class="fc bfc" id="L58" title="All 2 branches covered.">        if (em == null){</span>
-<span class="fc" id="L59">            throw new IllegalStateException(&quot;Error al acceder al repositorio&quot;);</span>
-        }
-
-<span class="fc" id="L62">        em.persist(entity);</span>
-
-<span class="fc" id="L64">    } catch (Exception ex){</span>
-<span class="fc" id="L65">        throw new IllegalStateException(&quot;Error al acceder al repositorio&quot;,ex);</span>
-<span class="fc" id="L66">    }</span>
-<span class="fc" id="L67">}</span>
-
-    public List&lt;T&gt; findRange(int first, int max) throws IllegalArgumentException, IllegalStateException {
-        //REFACTORIZAR
-
-        //Necesito criterialBuilder para crear queries a eso le voy a decir que quiero crear un criterial query
-        //
-<span class="nc" id="L74">        EntityManager em = null;</span>
-
-<span class="nc bnc" id="L76" title="All 4 branches missed.">        if (first &lt; 0 || max &lt; 0) {</span>
-<span class="nc" id="L77">            throw new IllegalArgumentException(&quot;Parametro no válido: first or max&quot;);</span>
+<span class="fc bfc" id="L34" title="All 2 branches covered.">        if (entity == null) {</span>
+<span class="fc" id="L35">            throw new IllegalArgumentException(&quot;Entity null no puede ser persistir&quot;);</span>
         }
 
         try {
-<span class="nc" id="L81">            em = getEntityManager();</span>
-<span class="nc bnc" id="L82" title="All 2 branches missed.">            if (em == null) {</span>
-<span class="nc" id="L83">                throw new IllegalStateException(&quot;Error al acceder al repositorio&quot;);</span>
+<span class="fc" id="L39">            em.persist(entity);</span>
+<span class="fc" id="L40">        } catch (Exception e) {</span>
+            // excepcion java lang, no requiere la dependencia
+<span class="fc" id="L42">            throw new IllegalStateException(&quot;Error acceder repositorio&quot;, e);</span>
+<span class="fc" id="L43">        }</span>
+<span class="fc" id="L44">    }</span>
+
+    public void delete(T entity) throws IllegalStateException, IllegalArgumentException {
+<span class="fc" id="L47">        EntityManager em = null;</span>
+<span class="fc bfc" id="L48" title="All 2 branches covered.">        if (entity == null) {</span>
+<span class="fc" id="L49">            throw new IllegalArgumentException(&quot;Entity null no puede ser persistir&quot;);</span>
+        }
+        try {
+<span class="fc" id="L52">            em = getEntityManager();</span>
+<span class="fc bfc" id="L53" title="All 2 branches covered.">            if (em == null) {</span>
+<span class="fc" id="L54">                throw new IllegalStateException(&quot;Error al acceder al repositorio&quot;);</span>
             }
-<span class="nc" id="L85">        } catch (Exception ex) {</span>
-<span class="nc" id="L86">            throw new IllegalStateException(&quot;Error al acceder al repositorio de Tipo&quot;, ex);</span>
-<span class="nc" id="L87">        }</span>
-<span class="nc" id="L88">        CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();</span>
-<span class="nc" id="L89">        CriteriaQuery q = cb.createQuery(tipoDatos);</span>
-<span class="nc" id="L90">        Root&lt;T&gt; raiz = q.from(tipoDatos);</span>
-<span class="nc" id="L91">        CriteriaQuery cq = q.select(raiz);</span>
-<span class="nc" id="L92">        TypedQuery query = getEntityManager().createQuery(cq);</span>
-<span class="nc" id="L93">        query.setFirstResult(first);</span>
-<span class="nc" id="L94">        query.setMaxResults(max);</span>
-<span class="nc" id="L95">        return query.getResultList();</span>
+            //T managedEntity = em.merge(entity);
+<span class="fc" id="L57">            em.remove(entity);</span>
+<span class="fc" id="L58">        } catch (Exception e) {</span>
+<span class="fc" id="L59">            throw new IllegalStateException(&quot;Error al acceder al repositorio&quot;, e);</span>
+<span class="fc" id="L60">        }</span>
+<span class="fc" id="L61">    }</span>
+
+
+    public T update(T entity) throws IllegalStateException, IllegalArgumentException {
+<span class="fc" id="L65">        EntityManager em = null;</span>
+<span class="fc bfc" id="L66" title="All 2 branches covered.">        if (entity == null) {</span>
+<span class="fc" id="L67">            throw new IllegalArgumentException(&quot;La entidad no puede ser nula&quot;);</span>
+        }
+        try {
+<span class="fc" id="L70">            em = getEntityManager();</span>
+<span class="fc bfc" id="L71" title="All 2 branches covered.">            if (em == null) {</span>
+<span class="fc" id="L72">                throw new IllegalStateException(&quot;Error al acceder al repositorio&quot;);</span>
+            }
+<span class="fc" id="L74">            T updatedEntity = em.merge(entity);</span>
+<span class="fc" id="L75">            return updatedEntity;</span>
+<span class="fc" id="L76">        } catch (Exception e) {</span>
+<span class="pc bpc" id="L77" title="3 of 4 branches missed.">            if (em != null &amp;&amp; em.getTransaction().isActive()) {</span>
+<span class="nc" id="L78">                em.getTransaction().rollback(); // Revertir cambios en caso de error</span>
+            }
+<span class="fc" id="L80">            throw new IllegalStateException(&quot;Error al acceder al repositorio&quot;, e);</span>
+        }
     }
 
+
+    public T findById(final Object idTipo) throws IllegalArgumentException, IllegalStateException {
+<span class="fc" id="L86">        EntityManager em = null;</span>
+<span class="fc bfc" id="L87" title="All 2 branches covered.">        if (idTipo == null) {</span>
+<span class="fc" id="L88">            throw new IllegalArgumentException(&quot;Tipo de sala no encontrado&quot;);</span>
+        }
+        try {
+<span class="fc" id="L91">            em = getEntityManager();</span>
+<span class="fc bfc" id="L92" title="All 2 branches covered.">            if (em == null) {</span>
+<span class="fc" id="L93">                throw new IllegalStateException(&quot;No se encontro el EntityManager&quot;);</span>
+            }
+<span class="fc" id="L95">        } catch (Exception ex) {</span>
+<span class="fc" id="L96">            throw new IllegalStateException(&quot;No se encontró el entity manager&quot;, ex);</span>
+<span class="fc" id="L97">        }</span>
+        //return em.find(TipoSala.class,id);
+        // return (TipoDatos) em.find(tipoDatos,id);
+
+<span class="fc" id="L101">        return (T) em.find(tipoDatos, idTipo);</span>
+
+        //return em.find(tipoDatos,id);
+
+    }
+
+    public List&lt;T&gt; findRange(int min, int max) {
+        // validacion
+<span class="fc bfc" id="L109" title="All 4 branches covered.">        if (min &lt; 0 || max &lt; 0) {</span>
+<span class="fc" id="L110">            throw new IllegalArgumentException(&quot;Ambos parametros tienen que ser positivos.&quot;);</span>
+        }
+<span class="pc bpc" id="L112" title="1 of 2 branches missed.">        if (max &lt; min) {</span>
+<span class="nc" id="L113">            throw new IllegalArgumentException(&quot;El maximo tiene que ser mayor al minimo.&quot;);</span>
+        }
+
+<span class="fc" id="L116">        EntityManager em = getEntityManager();</span>
+<span class="fc bfc" id="L117" title="All 2 branches covered.">        if (em == null) {</span>
+<span class="fc" id="L118">            throw new IllegalStateException(&quot;El EntityManager no se invoco correctamente.&quot;);</span>
+        }
+
+        // CriteriaBuilder y CriteriaQuery
+<span class="fc" id="L122">        CriteriaBuilder cb = em.getCriteriaBuilder();</span>
+<span class="fc" id="L123">        CriteriaQuery&lt;T&gt; q = cb.createQuery(tipoDatos);</span>
+<span class="fc" id="L124">        Root&lt;T&gt; raiz = q.from(tipoDatos);</span>
+<span class="fc" id="L125">        q.select(raiz);</span>
+
+        // corriendo la query
+<span class="fc" id="L128">        TypedQuery&lt;T&gt; query = em.createQuery(q);</span>
+<span class="fc" id="L129">        query.setFirstResult(min);</span>
+<span class="fc" id="L130">        query.setMaxResults(max);</span>
+
+<span class="fc" id="L132">        return query.getResultList();</span>
+    }
+
+
+    public Long count() throws IllegalStateException {
+<span class="fc" id="L137">        EntityManager em = null;</span>
+
+        try {
+<span class="fc" id="L140">            em = getEntityManager();</span>
+
+<span class="fc bfc" id="L142" title="All 2 branches covered.">            if (em == null) {</span>
+<span class="fc" id="L143">                throw new IllegalStateException(&quot;Error al acceder al repositorio&quot;);</span>
+            }
+
+<span class="fc" id="L146">            CriteriaBuilder cb = em.getCriteriaBuilder();</span>
+<span class="fc" id="L147">            CriteriaQuery&lt;Long&gt; cq = cb.createQuery(Long.class); // Definir que queremos un resultado de tipo Long</span>
+<span class="fc" id="L148">            Root&lt;T&gt; raiz = cq.from(tipoDatos);</span>
+<span class="fc" id="L149">            cq.select(cb.count(raiz)); // Utilizar el método count</span>
+
+<span class="fc" id="L151">            TypedQuery&lt;Long&gt; query = em.createQuery(cq);</span>
+<span class="fc" id="L152">            return query.getSingleResult(); // Obtener el resultado único de la consulta</span>
+
+<span class="fc" id="L154">        } catch (Exception e) {</span>
+<span class="fc" id="L155">            throw new IllegalStateException(&quot;Error al acceder al repositorio&quot;, e);</span>
+        }
+
+    }
+
+    public String imprimirCarnet() {
+<span class="fc" id="L161">        return &quot;OC22002&quot;;</span>
+    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

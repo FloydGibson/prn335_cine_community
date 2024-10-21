@@ -10,6 +10,7 @@ import jakarta.validation.constraints.Size;
 
     @Id
     @Column(name = &quot;id_asiento&quot;, nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -24,36 +25,36 @@ import jakarta.validation.constraints.Size;
     private Boolean activo;
 
     public Long getId() {
-<span class="nc" id="L27">        return id;</span>
+<span class="nc" id="L28">        return id;</span>
     }
 
     public void setId(Long id) {
-<span class="nc" id="L31">        this.id = id;</span>
-<span class="nc" id="L32">    }</span>
+<span class="nc" id="L32">        this.id = id;</span>
+<span class="nc" id="L33">    }</span>
 
     public Sala getIdSala() {
-<span class="nc" id="L35">        return idSala;</span>
+<span class="nc" id="L36">        return idSala;</span>
     }
 
     public void setIdSala(Sala idSala) {
-<span class="nc" id="L39">        this.idSala = idSala;</span>
-<span class="nc" id="L40">    }</span>
+<span class="nc" id="L40">        this.idSala = idSala;</span>
+<span class="nc" id="L41">    }</span>
 
     public String getNombre() {
-<span class="nc" id="L43">        return nombre;</span>
+<span class="nc" id="L44">        return nombre;</span>
     }
 
     public void setNombre(String nombre) {
-<span class="nc" id="L47">        this.nombre = nombre;</span>
-<span class="nc" id="L48">    }</span>
+<span class="nc" id="L48">        this.nombre = nombre;</span>
+<span class="nc" id="L49">    }</span>
 
     public Boolean getActivo() {
-<span class="nc" id="L51">        return activo;</span>
+<span class="nc" id="L52">        return activo;</span>
     }
 
     public void setActivo(Boolean activo) {
-<span class="nc" id="L55">        this.activo = activo;</span>
-<span class="nc" id="L56">    }</span>
+<span class="nc" id="L56">        this.activo = activo;</span>
+<span class="nc" id="L57">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

@@ -10,6 +10,7 @@ import java.time.OffsetDateTime;
 <span class="nc" id="L10">public class Reserva {</span>
     @Id
     @Column(name = &quot;id_reserva&quot;, nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -32,52 +33,52 @@ import java.time.OffsetDateTime;
     private String observaciones;
 
     public Long getId() {
-<span class="nc" id="L35">        return id;</span>
+<span class="nc" id="L36">        return id;</span>
     }
 
     public void setId(Long id) {
-<span class="nc" id="L39">        this.id = id;</span>
-<span class="nc" id="L40">    }</span>
+<span class="nc" id="L40">        this.id = id;</span>
+<span class="nc" id="L41">    }</span>
 
     public Programacion getIdProgramacion() {
-<span class="nc" id="L43">        return idProgramacion;</span>
+<span class="nc" id="L44">        return idProgramacion;</span>
     }
 
     public void setIdProgramacion(Programacion idProgramacion) {
-<span class="nc" id="L47">        this.idProgramacion = idProgramacion;</span>
-<span class="nc" id="L48">    }</span>
+<span class="nc" id="L48">        this.idProgramacion = idProgramacion;</span>
+<span class="nc" id="L49">    }</span>
 
     public TipoReserva getIdTipoReserva() {
-<span class="nc" id="L51">        return idTipoReserva;</span>
+<span class="nc" id="L52">        return idTipoReserva;</span>
     }
 
     public void setIdTipoReserva(TipoReserva idTipoReserva) {
-<span class="nc" id="L55">        this.idTipoReserva = idTipoReserva;</span>
-<span class="nc" id="L56">    }</span>
+<span class="nc" id="L56">        this.idTipoReserva = idTipoReserva;</span>
+<span class="nc" id="L57">    }</span>
 
     public OffsetDateTime getFechaReserva() {
-<span class="nc" id="L59">        return fechaReserva;</span>
+<span class="nc" id="L60">        return fechaReserva;</span>
     }
 
     public void setFechaReserva(OffsetDateTime fechaReserva) {
-<span class="nc" id="L63">        this.fechaReserva = fechaReserva;</span>
-<span class="nc" id="L64">    }</span>
+<span class="nc" id="L64">        this.fechaReserva = fechaReserva;</span>
+<span class="nc" id="L65">    }</span>
 
     public String getEstado() {
-<span class="nc" id="L67">        return estado;</span>
+<span class="nc" id="L68">        return estado;</span>
     }
 
     public void setEstado(String estado) {
-<span class="nc" id="L71">        this.estado = estado;</span>
-<span class="nc" id="L72">    }</span>
+<span class="nc" id="L72">        this.estado = estado;</span>
+<span class="nc" id="L73">    }</span>
 
     public String getObservaciones() {
-<span class="nc" id="L75">        return observaciones;</span>
+<span class="nc" id="L76">        return observaciones;</span>
     }
 
     public void setObservaciones(String observaciones) {
-<span class="nc" id="L79">        this.observaciones = observaciones;</span>
-<span class="nc" id="L80">    }</span>
+<span class="nc" id="L80">        this.observaciones = observaciones;</span>
+<span class="nc" id="L81">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

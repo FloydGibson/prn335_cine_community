@@ -10,71 +10,151 @@ import java.util.List;
 
 public abstract class AbstractDataPersist<T> {
 
-public abstract EntityManager getEntityManager();
+    public abstract EntityManager getEntityManager();
 
-Class tipoDatos;
-public AbstractDataPersist(Class tipoDatos){
-    this.tipoDatos = tipoDatos;
-}
+    Class tipoDatos;
+
+    public AbstractDataPersist(Class tipoDatos) {
+        this.tipoDatos = tipoDatos;
+    }
 
 
-    /**
-     *
-     * @param id Indentificador unico buscado
-     * @return Nulo si no se encuentra o el registro encontrado
-     *
-     */
-    public T findById(final Object id){
+    /*
+      Almacena el registro en el repositorio
+      param entity registro a almacenar
+      ex1 acces no se puede acceder al repo
+      Argument si el registro es nulo
+      Generar javadoc?
+       */
+    public void create(T entity) throws IllegalArgumentException, IllegalStateException {
+
         EntityManager em = null;
-        if (id == null){
-            throw new IllegalArgumentException("id invalido");
+        em = getEntityManager();
+
+        if (entity == null) {
+            throw new IllegalArgumentException("Entity null no puede ser persistir");
         }
-        try{
+
+        try {
+            em.persist(entity);
+        } catch (Exception e) {
+            // excepcion java lang, no requiere la dependencia
+            throw new IllegalStateException("Error acceder repositorio", e);
+        }
+    }
+
+    public void delete(T entity) throws IllegalStateException, IllegalArgumentException {
+        EntityManager em = null;
+        if (entity == null) {
+            throw new IllegalArgumentException("Entity null no puede ser persistir");
+        }
+        try {
             em = getEntityManager();
-            if (em == null){
+            if (em == null) {
                 throw new IllegalStateException("Error al acceder al repositorio");
             }
+            //T managedEntity = em.merge(entity);
+            em.remove(entity);
+        } catch (Exception e) {
+            throw new IllegalStateException("Error al acceder al repositorio", e);
+        }
+    }
 
+
+    public T update(T entity) throws IllegalStateException, IllegalArgumentException {
+        EntityManager em = null;
+        if (entity == null) {
+            throw new IllegalArgumentException("La entidad no puede ser nula");
+        }
+        try {
+            em = getEntityManager();
+            if (em == null) {
+                throw new IllegalStateException("Error al acceder al repositorio");
+            }
+            T updatedEntity = em.merge(entity);
+            return updatedEntity;
+        } catch (Exception e) {
+            throw new IllegalStateException("Error al acceder al repositorio", e);
+        }
+    }
+
+
+    public T findById(final Object idTipo) throws IllegalArgumentException, IllegalStateException {
+        EntityManager em = null;
+        if (idTipo == null) {
+            throw new IllegalArgumentException("Tipo de sala no encontrado");
+        }
+        try {
+            em = getEntityManager();
+            if (em == null) {
+                throw new IllegalStateException("No se encontro el EntityManager");
+            }
         } catch (Exception ex) {
-            throw new IllegalStateException("Error al acceder al repositorio",ex);
+            throw new IllegalStateException("No se encontró el entity manager", ex);
         }
-        return (T) em.find(tipoDatos, id);
+        //return em.find(TipoSala.class,id);
+        // return (TipoDatos) em.find(tipoDatos,id);
+
+        return (T) em.find(tipoDatos, idTipo);
+
+        //return em.find(tipoDatos,id);
+
     }
 
-    /**
-     *
-     * @param entity
-     * @throws IllegalStateException
-     * @throws IllegalArgumentException
-     */
-    public void create(final T entity) throws IllegalStateException,IllegalArgumentException{
-    EntityManager em = null;
-
-    if (entity == null){
-        throw new IllegalArgumentException("La entidad a persistir no puede ser nula");
-    }
-    try {
-        em = getEntityManager();
-        if (em == null){
-            throw new IllegalStateException("Error al acceder al repositorio");
+    public List<T> findRange(int min, int max) {
+        // validacion
+        if (min < 0 || max < 0) {
+            throw new IllegalArgumentException("Ambos parametros tienen que ser positivos.");
         }
 
-        em.persist(entity);
+        EntityManager em = getEntityManager();
+        if (em == null) {
+            throw new IllegalStateException("El EntityManager no se invoco correctamente.");
+        }
 
-    } catch (Exception ex){
-        throw new IllegalStateException("Error al acceder al repositorio",ex);
-    }
-}
-
-    public List<T> findRange(int first, int max) throws IllegalArgumentException, IllegalStateException {
-        CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
-        CriteriaQuery q = cb.createQuery(tipoDatos);
+        // CriteriaBuilder y CriteriaQuery
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<T> q = cb.createQuery(tipoDatos);
         Root<T> raiz = q.from(tipoDatos);
-        CriteriaQuery cq = q.select(raiz);
-        TypedQuery query = getEntityManager().createQuery(cq);
-        query.setFirstResult(first);
+        q.select(raiz);
+
+        // corriendo la query
+        TypedQuery<T> query = em.createQuery(q);
+        query.setFirstResult(min);
         query.setMaxResults(max);
+
         return query.getResultList();
     }
 
-}
+
+
+
+
+    public Long count() throws IllegalStateException {
+        EntityManager em = null;
+
+        try {
+            em = getEntityManager();
+
+            if (em == null) {
+                throw new IllegalStateException("Error al acceder al repositorio");
+            }
+
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<Long> cq = cb.createQuery(Long.class); // Definir que queremos un resultado de tipo Long
+            Root<T> raiz = cq.from(tipoDatos);
+            cq.select(cb.count(raiz)); // Utilizar el método count
+
+            TypedQuery<Long> query = em.createQuery(cq);
+            return query.getSingleResult(); // Obtener el resultado único de la consulta
+
+        } catch (Exception e) {
+            throw new IllegalStateException("Error al acceder al repositorio", e);
+        }
+
+    }
+
+    public String imprimirCarnet() {
+        return "OC22002";
+    }
+    }

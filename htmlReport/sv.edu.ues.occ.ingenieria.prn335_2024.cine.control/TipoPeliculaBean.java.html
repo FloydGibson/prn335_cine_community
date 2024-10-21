@@ -22,7 +22,7 @@ import sv.edu.ues.occ.ingenieria.prn335_2024.cine.entity.TipoPelicula;
 import java.io.Serializable;
 @Stateless
 @LocalBean
-public class TipoPeliculaBean extends AbstractDataPersist&lt;TipoPelicula&gt; implements Serializable {
+public class TipoPeliculaBean extends AbstractDataPersistence&lt;TipoPelicula&gt; implements Serializable {
 
     @PersistenceContext(unitName = &quot;CinePU&quot;)
     EntityManager em;

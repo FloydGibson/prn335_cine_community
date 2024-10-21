@@ -6,7 +6,7 @@ import sv.edu.ues.occ.ingenieria.prn335_2024.cine.entity.TipoAsiento;
 import sv.edu.ues.occ.ingenieria.prn335_2024.cine.entity.TipoAsiento;
 import java.io.Serializable;
 
-public class TipoAsientoBean extends AbstractDataPersist<TipoAsiento> implements Serializable {
+public class TipoAsientoBean extends AbstractDataPersistence<TipoAsiento> implements Serializable {
 
     @PersistenceContext(unitName = "CinePU")
         EntityManager em;

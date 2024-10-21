@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 @Stateless
 @LocalBean
 
-public class AsientoBean extends AbstractDataPersist&lt;Asiento&gt; implements Serializable{
+public class AsientoBean extends AbstractDataPersistence&lt;Asiento&gt; implements Serializable{
     @PersistenceContext(unitName = &quot;CinePU&quot;)
     EntityManager em;
 

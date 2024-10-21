@@ -12,7 +12,7 @@ import java.io.Serializable;
 @Stateless
 @LocalBean
 
-public class ProgramacionBean extends AbstractDataPersist<Programacion> implements Serializable {
+public class ProgramacionBean extends AbstractDataPersistence<Programacion> implements Serializable {
     @PersistenceContext(unitName = "CinePU")
     EntityManager em;
 

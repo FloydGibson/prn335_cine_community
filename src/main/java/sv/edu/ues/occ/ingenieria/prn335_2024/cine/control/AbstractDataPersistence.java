@@ -8,13 +8,14 @@ import jakarta.persistence.criteria.Root;
 
 import java.util.List;
 
-public abstract class AbstractDataPersist<T> {
+public abstract class AbstractDataPersistence<T> {
 
     public abstract EntityManager getEntityManager();
 
+
     Class tipoDatos;
 
-    public AbstractDataPersist(Class tipoDatos) {
+    public AbstractDataPersistence(Class tipoDatos) {
         this.tipoDatos = tipoDatos;
     }
 
@@ -42,6 +43,7 @@ public abstract class AbstractDataPersist<T> {
             throw new IllegalStateException("Error acceder repositorio", e);
         }
     }
+
 
     public void delete(T entity) throws IllegalStateException, IllegalArgumentException {
         EntityManager em = null;
@@ -74,6 +76,7 @@ public abstract class AbstractDataPersist<T> {
             T updatedEntity = em.merge(entity);
             return updatedEntity;
         } catch (Exception e) {
+
             throw new IllegalStateException("Error al acceder al repositorio", e);
         }
     }
@@ -106,6 +109,7 @@ public abstract class AbstractDataPersist<T> {
         if (min < 0 || max < 0) {
             throw new IllegalArgumentException("Ambos parametros tienen que ser positivos.");
         }
+
 
         EntityManager em = getEntityManager();
         if (em == null) {
@@ -157,4 +161,5 @@ public abstract class AbstractDataPersist<T> {
     public String imprimirCarnet() {
         return "OC22002";
     }
-    }
+}
+

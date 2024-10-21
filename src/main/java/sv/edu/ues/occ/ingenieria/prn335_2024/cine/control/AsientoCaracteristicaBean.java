@@ -13,7 +13,7 @@ import java.io.Serializable;
 @Stateless
 @LocalBean
 
-public class AsientoCaracteristicaBean extends AbstractDataPersist<AsientoCaracteristica> implements Serializable{
+public class AsientoCaracteristicaBean extends AbstractDataPersistence<AsientoCaracteristica> implements Serializable{
     @PersistenceContext(unitName = "CinePU")
     EntityManager em;
 

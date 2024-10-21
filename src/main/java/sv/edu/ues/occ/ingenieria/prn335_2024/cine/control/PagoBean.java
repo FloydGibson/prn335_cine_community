@@ -14,7 +14,7 @@ import java.io.Serializable;
 @Stateless
 @LocalBean
 
-public class PagoBean extends AbstractDataPersist<Pago> implements Serializable{
+public class PagoBean extends AbstractDataPersistence<Pago> implements Serializable{
     @PersistenceContext(unitName = "CinePU")
     EntityManager em;
 

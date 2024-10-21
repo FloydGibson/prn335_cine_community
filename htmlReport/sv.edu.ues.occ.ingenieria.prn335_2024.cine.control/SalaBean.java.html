@@ -11,7 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-public class SalaBean extends AbstractDataPersist&lt;Sala&gt; implements Serializable {
+public class SalaBean extends AbstractDataPersistence&lt;Sala&gt; implements Serializable {
 
     @PersistenceContext(unitName = &quot;CinePU&quot;)
     EntityManager em;

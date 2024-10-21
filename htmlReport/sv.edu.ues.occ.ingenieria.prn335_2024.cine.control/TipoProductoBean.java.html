@@ -17,7 +17,7 @@ import java.io.Serializable;
 
 @Stateless
 @LocalBean
-public class TipoProductoBean extends AbstractDataPersist&lt;TipoProducto&gt; implements Serializable {
+public class TipoProductoBean extends AbstractDataPersistence&lt;TipoProducto&gt; implements Serializable {
 
     @PersistenceContext(unitName = &quot;CinePU&quot;)
     EntityManager em;

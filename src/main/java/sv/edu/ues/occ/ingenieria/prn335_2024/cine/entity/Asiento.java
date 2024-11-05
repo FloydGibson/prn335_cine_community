@@ -11,7 +11,7 @@ import jakarta.validation.constraints.Size;
     @Id
     @Column(name = "id_asiento", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idAsiento;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_sala")
@@ -24,12 +24,12 @@ import jakarta.validation.constraints.Size;
     @Column(name = "activo")
     private Boolean activo;
 
-    public Long getId() {
-        return id;
+    public Long getIdAsiento() {
+        return idAsiento;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdAsiento(Long id) {
+        this.idAsiento = id;
     }
 
     public Sala getIdSala() {

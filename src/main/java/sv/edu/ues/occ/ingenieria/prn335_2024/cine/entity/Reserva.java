@@ -11,7 +11,7 @@ public class Reserva {
     @Id
     @Column(name = "id_reserva", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idReserva;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_programacion")
@@ -32,12 +32,12 @@ public class Reserva {
     @Column(name = "observaciones")
     private String observaciones;
 
-    public Long getId() {
-        return id;
+    public Long getIdReserva() {
+        return idReserva;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdReserva(Long id) {
+        this.idReserva = id;
     }
 
     public Programacion getIdProgramacion() {

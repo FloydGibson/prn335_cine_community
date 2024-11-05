@@ -9,7 +9,7 @@ public class TipoPelicula {
     @Id
     @Column(name = "id_tipo_pelicula", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer idTipoPelicula;
 
     @Size(max = 155)
     @Column(name = "nombre", length = 155)
@@ -26,12 +26,12 @@ public class TipoPelicula {
     @Column(name = "expresion_regular")
     private String expresionRegular;
 
-    public Integer getId() {
-        return id;
+    public Integer getIdTipoPelicula() {
+        return idTipoPelicula;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdTipoPelicula(Integer id) {
+        this.idTipoPelicula = id;
     }
 
     public String getNombre() {

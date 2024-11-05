@@ -10,7 +10,7 @@ public class FacturaDetalleSala {
     @Id
     @Column(name = "id_factura_detalle_sala", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idFacturaDetalleSala;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_factura")
@@ -23,12 +23,12 @@ public class FacturaDetalleSala {
     @Column(name = "monto", precision = 10, scale = 2)
     private BigDecimal monto;
 
-    public Long getId() {
-        return id;
+    public Long getIdFacturaDetalleSala() {
+        return idFacturaDetalleSala;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdFacturaDetalleSala(Long id) {
+        this.idFacturaDetalleSala = id;
     }
 
     public Factura getIdFactura() {

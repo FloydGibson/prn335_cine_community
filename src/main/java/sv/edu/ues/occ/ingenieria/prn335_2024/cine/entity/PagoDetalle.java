@@ -10,7 +10,7 @@ public class PagoDetalle {
     @Id
     @Column(name = "id_pago_detalle", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idPagoDetalle;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_pago")
@@ -23,12 +23,12 @@ public class PagoDetalle {
     @Column(name = "concepto")
     private String concepto;
 
-    public Long getId() {
-        return id;
+    public Long getIdPagoDetalle() {
+        return idPagoDetalle;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdPagoDetalle(Long id) {
+        this.idPagoDetalle = id;
     }
 
     public Pago getIdPago() {

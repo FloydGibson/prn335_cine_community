@@ -10,7 +10,7 @@ public class Programacion {
     @Id
     @Column(name = "id_programacion", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idProgramacion;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_sala")
@@ -30,12 +30,12 @@ public class Programacion {
     @Column(name = "comentarios")
     private String comentarios;
 
-    public Long getId() {
-        return id;
+    public Long getIdProgramacion() {
+        return idProgramacion;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdProgramacion(Long id) {
+        this.idProgramacion = id;
     }
 
     public Sala getIdSala() {

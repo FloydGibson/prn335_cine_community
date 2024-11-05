@@ -1,7 +1,6 @@
 package sv.edu.ues.occ.ingenieria.prn335_2024.cine.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 
 @Entity
 @Table(name = "tipo_sala")
@@ -10,10 +9,6 @@ public class TipoSala {
     @Column(name = "id_tipo_sala", nullable=false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Integer idTipoSala;
-
-    @Pattern(regexp = "//d/d/d/d/d/d/d/d/ -/d/")
-    @NotBlank(message = "Ingrese un nombre valido")
-    @Size(min=3, max = 155)
     @Column(name = "nombre", length = 155)
     protected String nombre;
     @Column(name = "activo")

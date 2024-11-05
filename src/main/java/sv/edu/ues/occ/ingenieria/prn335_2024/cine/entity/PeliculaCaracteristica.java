@@ -4,11 +4,16 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "pelicula_caracteristica")
+
+@NamedQueries({
+        @NamedQuery(name="PeliculaCaracteristica.findByIdPelicula",query = "SELECT pc FROM PeliculaCaracteristica  pc WHERE pc.idPelicula.idPelicula=:idPelicula ORDER BY pc.idTipoPelicula.nombre")
+})
+
 public class PeliculaCaracteristica {
     @Id
     @Column(name = "id_pelicula_caracteristica", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idPeliculaCaracteristica;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_tipo_pelicula")
@@ -22,12 +27,12 @@ public class PeliculaCaracteristica {
     @Column(name = "valor")
     private String valor;
 
-    public Long getId() {
-        return id;
+    public Long getIdPeliculaCaracteristica() {
+        return idPeliculaCaracteristica;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdPeliculaCaracteristica(Long id) {
+        this.idPeliculaCaracteristica = id;
     }
 
     public TipoPelicula getIdTipoPelicula() {

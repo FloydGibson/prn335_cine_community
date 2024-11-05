@@ -9,7 +9,7 @@ public class TipoProducto {
     @Id
     @Column(name = "id_tipo_producto", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer idTipoProducto;
 
     @Size(max = 155)
     @Column(name = "nombre", length = 155)
@@ -22,12 +22,12 @@ public class TipoProducto {
     @Column(name = "comentarios")
     private String comentarios;
 
-    public Integer getId() {
-        return id;
+    public Integer getIdTipoProducto() {
+        return idTipoProducto;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdTipoProducto(Integer id) {
+        this.idTipoProducto = id;
     }
 
     public String getNombre() {

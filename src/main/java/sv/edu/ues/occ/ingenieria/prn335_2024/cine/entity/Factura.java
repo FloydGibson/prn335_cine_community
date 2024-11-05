@@ -11,7 +11,7 @@ public class Factura {
     @Id
     @Column(name = "id_factura", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idFactura;
 
     @Size(max = 255)
     @Column(name = "cliente")
@@ -28,12 +28,12 @@ public class Factura {
     @Column(name = "comentarios")
     private String comentarios;
 
-    public Long getId() {
-        return id;
+    public Long getIdFactura() {
+        return idFactura;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdFactura(Long id) {
+        this.idFactura = id;
     }
 
     public String getCliente() {

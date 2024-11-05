@@ -8,7 +8,6 @@ import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import sv.edu.ues.occ.ingenieria.prn335_2024.cine.control.TipoSalaBean;
 import sv.edu.ues.occ.ingenieria.prn335_2024.cine.entity.TipoSala;
-
 import java.io.Serializable;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -82,7 +81,7 @@ public void btnGuardarHandler (ActionEvent actionEvent) {
 
     public void btnModificarHandler (ActionEvent actionEvent) {
         FacesMessage mensaje = new FacesMessage();
-       // TipoSala actualizado = tsBean.update(registro);
+       TipoSala actualizado = tsBean.update(registro);
     }
 }
 

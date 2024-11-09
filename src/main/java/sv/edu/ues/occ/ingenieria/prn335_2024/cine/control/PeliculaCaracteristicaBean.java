@@ -21,7 +21,7 @@ public class PeliculaCaracteristicaBean extends AbstractDataPersistence<Pelicula
 
     public PeliculaCaracteristicaBean() {
         super(Pelicula.class);
-    }
+    }   
 
     @Override
     public EntityManager getEntityManager() {

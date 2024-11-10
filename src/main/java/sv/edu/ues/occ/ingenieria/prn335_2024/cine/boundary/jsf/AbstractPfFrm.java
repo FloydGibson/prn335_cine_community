@@ -1,5 +1,4 @@
 package sv.edu.ues.occ.ingenieria.prn335_2024.cine.boundary.jsf;
-
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
@@ -14,11 +13,11 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-public abstract class AbstractPfFrm<T> implements Serializable{
+public abstract class AbstractPfFrm<T> implements Serializable {
 
-    LazyDataModel<T> modelo;
-    T registro;
-    ESTADO_CRUD estado;
+     LazyDataModel<T> modelo;
+     T registro;
+     ESTADO_CRUD estado;
 
     public abstract String getTituloPag();
 
@@ -228,6 +227,7 @@ public abstract class AbstractPfFrm<T> implements Serializable{
         this.estado = estado;
     }
 }
+
 
 
 

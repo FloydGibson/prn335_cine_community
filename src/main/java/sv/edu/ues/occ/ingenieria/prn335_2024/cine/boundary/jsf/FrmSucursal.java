@@ -54,3 +54,4 @@ public class FrmSucursal extends AbstractPfFrm<Sucursal> {
         return "";
     }
 }
+

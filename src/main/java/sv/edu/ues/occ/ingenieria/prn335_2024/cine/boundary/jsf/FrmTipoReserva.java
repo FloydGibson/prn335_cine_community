@@ -36,7 +36,7 @@ public class FrmTipoReserva extends AbstractPfFrm<TipoReserva> implements Serial
 
     @Override
     public Object getId(TipoReserva o){
-        return o.getIdTipoReserva();
+      return o.getIdTipoReserva();
     }
 
     @Override

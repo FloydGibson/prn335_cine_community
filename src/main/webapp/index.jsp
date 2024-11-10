@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>JSP - Proyecto</title>
+    <title>JSP - Hello World</title>
 </head>
 <body>
 <h1><%= "Hello World!" %>

@@ -32,39 +32,9 @@ public class SalaBean extends AbstractDataPersistence<Sala> implements Serializa
     public void create(Sala sala){
         super.create(sala);
     }
-/*
+
      //Esta es una consulta devuelve una lista de entidades de Sala, Usa la Query Sala.findByIdTipoSala
 
-
-    public List<Sala> findSalaWithMostTipoSala() throws IllegalArgumentException{
-        try{
-            em=getEntityManager();
-            if(em!=null){
-                Query query = em.createNamedQuery("Sala.findSalaWithMostTipoSala");
-                query.setMaxResults(1);
-                return query.getResultList();
-            }
-
-        }catch (Exception e){
-            throw new IllegalArgumentException("NOPViejo");
-
-        }
-        return null;
-    }
-
-
-    public List<Sala> findSalaWithTipoSala(Integer idTipoSala){
-        try{
-            if(em!=null){
-                Query query = em.createNamedQuery("Sala.findSalaWithTipoSala");
-                query.setParameter("idTipoSala", idTipoSala);
-               return query.getResultList();
-            }
-        }catch (Exception e){
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
-        }
-        return Collections.emptyList();
-    }
 
     public List<Sala> findByIdTipoSala(Integer idTipoSala, int first, int max) {
         if (idTipoSala != null) {
@@ -85,5 +55,4 @@ public class SalaBean extends AbstractDataPersistence<Sala> implements Serializa
         return Collections.emptyList();
     }
 
-*/
 }

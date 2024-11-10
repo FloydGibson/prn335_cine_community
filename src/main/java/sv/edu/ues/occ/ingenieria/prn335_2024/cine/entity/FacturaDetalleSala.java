@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "factura_detalle_sala")
+@Table(name = "factura_detalle_sala", schema = "public")
 public class FacturaDetalleSala {
     @Id
     @Column(name = "id_factura_detalle_sala", nullable = false)
@@ -19,6 +19,7 @@ public class FacturaDetalleSala {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_reserva_detalle")
     private ReservaDetalle idReservaDetalle;
+
 
     @Column(name = "monto", precision = 10, scale = 2)
     private BigDecimal monto;
@@ -54,5 +55,4 @@ public class FacturaDetalleSala {
     public void setMonto(BigDecimal monto) {
         this.monto = monto;
     }
-
 }

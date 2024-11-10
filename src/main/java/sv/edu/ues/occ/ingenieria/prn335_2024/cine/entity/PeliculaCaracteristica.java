@@ -3,12 +3,11 @@ package sv.edu.ues.occ.ingenieria.prn335_2024.cine.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "pelicula_caracteristica")
-
+@Table(name = "pelicula_caracteristica", schema = "public")
 @NamedQueries({
-        @NamedQuery(name="PeliculaCaracteristica.findByIdPelicula",query = "SELECT pc FROM PeliculaCaracteristica  pc WHERE pc.idPelicula.idPelicula=:idPelicula ORDER BY pc.idTipoPelicula.nombre")
+        @NamedQuery(name = "PeliculaCaracteristica.findByIdPelicula",query = "SELECT pc FROM PeliculaCaracteristica PC WHERE pc.idPelicula.idPelicula=:idPelicula ORDER BY pc.idTipoPelicula.nombre ASC "),
+        @NamedQuery(name = "PeliculaCaracteristica.countByIdPelicula", query = "SELECT COUNT(pc.idPeliculaCaracteristica) FROM PeliculaCaracteristica pc WHERE pc.idPelicula.idPelicula=:idPelicula")
 })
-
 public class PeliculaCaracteristica {
     @Id
     @Column(name = "id_pelicula_caracteristica", nullable = false)

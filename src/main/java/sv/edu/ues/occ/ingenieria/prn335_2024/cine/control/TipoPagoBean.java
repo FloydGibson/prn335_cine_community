@@ -29,6 +29,7 @@ public class TipoPagoBean extends AbstractDataPersistence<TipoPago> implements S
 
     @Override
     public EntityManager getEntityManager() {
+
         return em;
     }
 

@@ -3,8 +3,11 @@ package sv.edu.ues.occ.ingenieria.prn335_2024.cine.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 
+import java.util.List;
+
+
 @Entity
-@Table(name = "producto")
+@Table(name = "producto", schema = "public")
 public class Producto {
     @Id
     @Column(name = "id_producto", nullable = false)
@@ -14,6 +17,9 @@ public class Producto {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_tipo_producto")
     private TipoProducto idTipoProducto;
+
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL, mappedBy = "idProducto")
+    private List<FacturaDetalleProducto> facturaDetalleProductoList;
 
     @Size(max = 155)
     @Column(name = "nombre", length = 155)
@@ -66,4 +72,11 @@ public class Producto {
         this.descripcion = descripcion;
     }
 
+    public List<FacturaDetalleProducto> getFacturaDetalleProductoList() {
+        return facturaDetalleProductoList;
+    }
+
+    public void setFacturaDetalleProductoList(List<FacturaDetalleProducto> facturaDetalleProductoList) {
+        this.facturaDetalleProductoList = facturaDetalleProductoList;
+    }
 }

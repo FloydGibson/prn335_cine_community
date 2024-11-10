@@ -3,11 +3,15 @@ package sv.edu.ues.occ.ingenieria.prn335_2024.cine.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 
+import java.util.List;
+
 @Entity
-@Table(name = "Asiento")
-
-                public class Asiento {
-
+@Table(name = "asiento", schema = "public")
+@NamedQueries({
+        @NamedQuery(name = "Asiento.findByIdSala",query = "SELECT asi FROM Asiento asi WHERE asi.idSala.idSala=:idSala ORDER BY asi.idAsiento ASC "),
+        @NamedQuery(name = "Asiento.countByIdSala", query = "SELECT COUNT(asi.idAsiento) FROM Asiento asi WHERE asi.idSala.idSala=:idSala")
+})
+public class Asiento {
     @Id
     @Column(name = "id_asiento", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,6 +20,12 @@ import jakarta.validation.constraints.Size;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_sala")
     private Sala idSala;
+
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL, mappedBy = "idAsiento")
+    private List<ReservaDetalle> reservaDetalles;
+
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL, mappedBy = "idAsiento")
+    private List<AsientoCaracteristica> asientoCaracteristicaList;
 
     @Size(max = 155)
     @Column(name = "nombre", length = 155)
@@ -56,4 +66,19 @@ import jakarta.validation.constraints.Size;
         this.activo = activo;
     }
 
+    public List<ReservaDetalle> getReservaDetalles() {
+        return reservaDetalles;
+    }
+
+    public void setReservaDetalles(List<ReservaDetalle> reservaDetalles) {
+        this.reservaDetalles = reservaDetalles;
+    }
+
+    public List<AsientoCaracteristica> getAsientoCaracteristicaList() {
+        return asientoCaracteristicaList;
+    }
+
+    public void setAsientoCaracteristicaList(List<AsientoCaracteristica> asientoCaracteristicaList) {
+        this.asientoCaracteristicaList = asientoCaracteristicaList;
+    }
 }

@@ -3,38 +3,38 @@ package sv.edu.ues.occ.ingenieria.prn335_2024.cine.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "sala", schema = "public")
 @NamedQueries({
-        @NamedQuery(name="Sala.findByIdTipoSala",
-                query="SELECT s FROM SalaCaracteristica sc JOIN sc.idSala s WHERE sc.idTipoSala.idTipoSala = :idTipoSala GROUP BY s.idSala ORDER BY s.nombre ASC ")
+        //Se registra en el motor una sola vez, hay que colocar un nombre único porque no se puede repetir
+        @NamedQuery(name= "Sala.findByIdTipoSala",
+                query = "SELECT s FROM SalaCaracteristica sc JOIN sc.idSala s WHERE sc.idTipoSala.idTipoSala = :idTipoSala GROUP BY s.idSala ORDER BY s.nombre ASC")
 })
-
-
 public class Sala {
-
-
-
     @Id
     @Column(name = "id_sala", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idSala;
 
+    public Sala(Integer idSala) {
+        this.idSala = idSala;
+    }
+    public Sala() {}
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_sucursal")
     private Sucursal idSucursal;
 
-    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "idSala")
-    private Set<SalaCaracteristica> SalaCaracteristica;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "idSala")
+    private List<SalaCaracteristica> salaCaracteristicaList;
 
-    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "idSala")
-    private Set<Programacion> Programacion;
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL, mappedBy = "idSala")
+    private List<Programacion> programacionList;
 
-    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "idSala")
-    private Set<Asiento> Asiento;
-
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL, mappedBy = "idSala")
+    private List<Asiento> asientoList;
 
     @Size(max = 155)
     @Column(name = "nombre", length = 155)
@@ -46,14 +46,6 @@ public class Sala {
     @Lob
     @Column(name = "observaciones")
     private String observaciones;
-
-    public Sala() {
-
-    }
-
-    public Sala(int i) {
-    }
-
 
     public Integer getIdSala() {
         return idSala;
@@ -95,4 +87,27 @@ public class Sala {
         this.observaciones = observaciones;
     }
 
+    public List<SalaCaracteristica> getSalaCaracteristicaList() {
+        return salaCaracteristicaList;
+    }
+
+    public void setSalaCaracteristicaList(List<SalaCaracteristica> salaCaracteristicaList) {
+        this.salaCaracteristicaList = salaCaracteristicaList;
+    }
+
+    public List<Programacion> getProgramacionList() {
+        return programacionList;
+    }
+
+    public void setProgramacionList(List<Programacion> programacionList) {
+        this.programacionList = programacionList;
+    }
+
+    public List<Asiento> getAsientoList() {
+        return asientoList;
+    }
+
+    public void setAsientoList(List<Asiento> asientoList) {
+        this.asientoList = asientoList;
+    }
 }

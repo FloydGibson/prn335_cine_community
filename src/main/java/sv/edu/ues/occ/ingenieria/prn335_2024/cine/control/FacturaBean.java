@@ -8,20 +8,20 @@ import sv.edu.ues.occ.ingenieria.prn335_2024.cine.entity.Factura;
 
 import java.io.Serializable;
 
-    @Stateless
-    @LocalBean
+@Stateless
+@LocalBean
+public class FacturaBean extends AbstractDataPersistence<Factura> implements Serializable {
+    @PersistenceContext(unitName = "CinePU")
 
-    public class FacturaBean extends AbstractDataPersistence<Factura> implements Serializable {
-        @PersistenceContext(unitName = "CinePU")
-        EntityManager em;
-
-        public FacturaBean() {
-            super(Factura.class);
-        }
-
-        @Override
-        public EntityManager getEntityManager() {
-            return em;
-        }
-
+    EntityManager em;
+    public FacturaBean(){
+        super(Factura.class);
     }
+    public EntityManager getEntityManager() {
+        return em;
+    }
+
+
+
+
+}

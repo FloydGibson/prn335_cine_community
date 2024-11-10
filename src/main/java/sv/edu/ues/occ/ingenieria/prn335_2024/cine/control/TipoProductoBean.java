@@ -1,10 +1,3 @@
-/*package sv.edu.ues.occ.ingenieria.prn335_2024.cine.control;
-
-public class TipoProductoBean {
-}
-
- */
-//Lo de arriba sobra borralo
 package sv.edu.ues.occ.ingenieria.prn335_2024.cine.control;
 
 import jakarta.ejb.LocalBean;

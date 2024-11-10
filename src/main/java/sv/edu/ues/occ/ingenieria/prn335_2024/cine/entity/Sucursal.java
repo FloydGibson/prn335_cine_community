@@ -3,13 +3,19 @@ package sv.edu.ues.occ.ingenieria.prn335_2024.cine.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 
+import java.util.List;
+
+
 @Entity
-@Table(name = "sucursal")
+@Table(name = "sucursal", schema = "public")
 public class Sucursal {
     @Id
     @Column(name = "id_sucursal", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idSucursal;
+
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL, mappedBy = "idSucursal")
+    private List<Sala> salaList;
 
     @Size(max = 155)
     @Column(name = "nombre", length = 155)
@@ -76,4 +82,11 @@ public class Sucursal {
         this.activo = activo;
     }
 
+    public List<Sala> getSalaList() {
+        return salaList;
+    }
+
+    public void setSalaList(List<Sala> salaList) {
+        this.salaList = salaList;
+    }
 }

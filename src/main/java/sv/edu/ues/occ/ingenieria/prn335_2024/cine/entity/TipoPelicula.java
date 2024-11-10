@@ -1,17 +1,25 @@
 package sv.edu.ues.occ.ingenieria.prn335_2024.cine.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
+import java.util.List;
+
+
 @Entity
-@Table(name = "tipo_pelicula")
+@Table(name = "tipo_pelicula", schema = "public")
 public class TipoPelicula {
     @Id
     @Column(name = "id_tipo_pelicula", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idTipoPelicula;
 
-    @Size(max = 155)
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL, mappedBy = "idTipoPelicula")
+    private List<PeliculaCaracteristica> peliculaCaracteristicaList;
+
+    @NotBlank
+    @Size(max = 155, min = 3)
     @Column(name = "nombre", length = 155)
     private String nombre;
 
@@ -66,4 +74,11 @@ public class TipoPelicula {
         this.expresionRegular = expresionRegular;
     }
 
+    public List<PeliculaCaracteristica> getPeliculaCaracteristicaList() {
+        return peliculaCaracteristicaList;
+    }
+
+    public void setPeliculaCaracteristicaList(List<PeliculaCaracteristica> peliculaCaracteristicaList) {
+        this.peliculaCaracteristicaList = peliculaCaracteristicaList;
+    }
 }

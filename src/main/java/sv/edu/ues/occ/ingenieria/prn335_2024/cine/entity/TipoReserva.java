@@ -1,17 +1,25 @@
 package sv.edu.ues.occ.ingenieria.prn335_2024.cine.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
+import java.util.List;
+
+
 @Entity
-@Table(name = "tipo_reserva")
+@Table(name = "tipo_reserva", schema = "public")
 public class TipoReserva {
     @Id
     @Column(name = "id_tipo_reserva", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idTipoReserva;
 
-    @Size(max = 155)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "idTipoReserva")
+    private List<Reserva> reservaList;
+
+    @NotBlank
+    @Size(max = 155, min = 3)
     @Column(name = "nombre", length = 155)
     private String nombre;
 
@@ -54,4 +62,11 @@ public class TipoReserva {
         this.comentarios = comentarios;
     }
 
+    public List<Reserva> getReservaList() {
+        return reservaList;
+    }
+
+    public void setReservaList(List<Reserva> reservaList) {
+        this.reservaList = reservaList;
+    }
 }

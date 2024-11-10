@@ -3,9 +3,10 @@ package sv.edu.ues.occ.ingenieria.prn335_2024.cine.entity;
 import jakarta.persistence.*;
 
 import java.time.OffsetDateTime;
+import java.util.List;
 
 @Entity
-@Table(name = "programacion")
+@Table(name = "programacion", schema = "public")
 public class Programacion {
     @Id
     @Column(name = "id_programacion", nullable = false)
@@ -19,6 +20,9 @@ public class Programacion {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_pelicula")
     private Pelicula idPelicula;
+
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL, mappedBy = "idProgramacion")
+    private List<Reserva> reservaList;
 
     @Column(name = "desde")
     private OffsetDateTime desde;
@@ -78,4 +82,11 @@ public class Programacion {
         this.comentarios = comentarios;
     }
 
+    public List<Reserva> getReservaList() {
+        return reservaList;
+    }
+
+    public void setReservaList(List<Reserva> reservaList) {
+        this.reservaList = reservaList;
+    }
 }

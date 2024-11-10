@@ -7,6 +7,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import sv.edu.ues.occ.ingenieria.prn335_2024.cine.entity.PeliculaCaracteristica;
+import sv.edu.ues.occ.ingenieria.prn335_2024.cine.entity.SalaCaracteristica;
 
 import java.io.Serializable;
 import java.util.List;
@@ -15,13 +16,13 @@ import java.util.logging.Logger;
 
 @Stateless
 @LocalBean
-public class PeliculaCaracteristicaBean extends AbstractDataPersistence<PeliculaCaracteristica> implements Serializable {
+public class SalaCaracteristicaBean extends AbstractDataPersistence<SalaCaracteristica> implements Serializable {
 
     @PersistenceContext(unitName = "CinePU")
     EntityManager em;
 
-    public PeliculaCaracteristicaBean() {
-        super(PeliculaCaracteristica.class);
+    public SalaCaracteristicaBean() {
+        super(SalaCaracteristica.class);
     }
 
     @Override
@@ -29,10 +30,10 @@ public class PeliculaCaracteristicaBean extends AbstractDataPersistence<Pelicula
         return em;
     }
 
-    public int countPelicula(final Long idPelicula){
+    public int countSala(final int idSala){
         try {
-            TypedQuery<Long> q = em.createNamedQuery("PeliculaCaracteristica.countByIdPelicula", Long.class);
-            q.setParameter("idPelicula", idPelicula);
+            TypedQuery<Long> q = em.createNamedQuery("SalaCaracteristica.countByIdSala", Long.class);
+            q.setParameter("idSala", idSala);
             return q.getSingleResult().intValue();
         }catch (Exception e) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
@@ -40,10 +41,11 @@ public class PeliculaCaracteristicaBean extends AbstractDataPersistence<Pelicula
         return 0;
     }
 
-    public List<PeliculaCaracteristica> findByIdPelicula(final Long idPelicula,int first, int max){
+    public List<SalaCaracteristica> findByIdSala(final int idSala, int first, int max){
+
         try {
-            TypedQuery<PeliculaCaracteristica> q = em.createNamedQuery("PeliculaCaracteristica.findByIdPelicula", PeliculaCaracteristica.class);
-            q.setParameter("idPelicula", idPelicula);
+            TypedQuery<SalaCaracteristica> q = em.createNamedQuery("SalaCaracteristica.findByIdSala", SalaCaracteristica.class);
+            q.setParameter("idSala", idSala);
             q.setFirstResult(first);
             q.setMaxResults(max);
             return q.getResultList();

@@ -4,14 +4,24 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 
 import java.time.OffsetDateTime;
+import java.util.List;
 
 @Entity
-@Table(name = "factura")
+@Table(name = "factura", schema = "public")
 public class Factura {
     @Id
     @Column(name = "id_factura", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idFactura;
+
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL, mappedBy = "idFactura")
+    private List<FacturaDetalleSala> facturaDetalleSalas;
+
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL, mappedBy = "idFactura")
+    private List<FacturaDetalleProducto> facturaDetalleProductoList;
+
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL, mappedBy = "idFactura")
+    private List<Pago> pagoList;
 
     @Size(max = 255)
     @Column(name = "cliente")
@@ -68,4 +78,28 @@ public class Factura {
         this.comentarios = comentarios;
     }
 
+
+    public List<Pago> getPagoList() {
+        return pagoList;
+    }
+
+    public void setPagoList(List<Pago> pagoList) {
+        this.pagoList = pagoList;
+    }
+
+    public List<FacturaDetalleSala> getFacturaDetalleSalas() {
+        return facturaDetalleSalas;
+    }
+
+    public void setFacturaDetalleSalas(List<FacturaDetalleSala> facturaDetalleSalas) {
+        this.facturaDetalleSalas = facturaDetalleSalas;
+    }
+
+    public List<FacturaDetalleProducto> getFacturaDetalleProductoList() {
+        return facturaDetalleProductoList;
+    }
+
+    public void setFacturaDetalleProductoList(List<FacturaDetalleProducto> facturaDetalleProductoList) {
+        this.facturaDetalleProductoList = facturaDetalleProductoList;
+    }
 }

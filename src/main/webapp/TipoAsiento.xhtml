@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<c:composition xmlns="http://www.w3.org/1999/xhtml"
+               xmlns:f="http://xmlns.jcp.org/jsf/core"
+               xmlns:h="http://xmlns.jcp.org/jsf/html"
+               xmlns:p="http://primefaces.org/ui"
+               xmlns:crud="jakarta.faces.composite/crud"
+               xmlns:c="jakarta.faces.facelets"
+               template="WEB-INF/templates/principal.xhtml" >
+    <c:define name="titulo">
+        #{frmTipoAsiento.tituloPag}
+    </c:define>
+
+    <c:define name="cuerpo">
+        <h:panelGrid>
+            <h:panelGroup id="pnlTabla">
+                <h:form id="frmTable">
+                    <p:dataTable
+                            value="#{frmTipoAsiento.modelo}"
+                            var="r"
+                            rows="#{frmTipoAsiento.registrosPorPagina}"
+                            lazy="true"
+                            selectionMode="single"
+                            selection="#{frmTipoAsiento.registro}"
+                            paginator="true"
+                            rendered="#{frmTipoAsiento.estado == 'NINGUNO'}"
+                    >
+                        <p:ajax event="rowSelect" update=":pnlDetalle :pnlTabla" process="@this"
+                                listener="#{frmTipoAsiento.cambiarSeleccion}"
+                        />
+
+                        <p:column headerText="ID_TIPO_ASIENTO">
+                            <h:outputText value="#{r.idTipoAsiento}"/>
+                        </p:column>
+                        <p:column headerText="NOMBRE_TIPO_ASIENTO">
+                            <h:outputText value="#{r.nombre}"/>
+                        </p:column>
+                        <p:column headerText="ACTIVO">
+                            <h:outputText value="#{r.activo}"/>
+                        </p:column>
+                        <p:column headerText="COMENTARIOS">
+                            <h:outputText value="#{r.comentarios}"/>
+                        </p:column>
+                        <p:column headerText="EXPRESION_REGULAR">
+                            <h:outputText value="#{r.expresionRegular}"/>
+                        </p:column>
+
+                    </p:dataTable>
+
+                    <h:panelGrid columns="2">
+                        <crud:botonesTop frm="#{frmTipoAsiento}"/>
+                    </h:panelGrid>
+
+                </h:form>
+            </h:panelGroup>
+            <h:panelGroup id="pnlDetalle" styleClass="detalle">
+                <h:form id="frmDetalle"  rendered="#{not empty frmTipoAsiento.registro}">
+                    <p:panelGrid columns="2">
+                        <p:outputLabel value="ID_TIPO_RESERVA" for="txtIdTipoReserva"/>
+                        <h:inputText id="txtIdTipoReserva"
+                                     value="#{frmTipoAsiento.registro.idTipoAsiento}" readonly="false" disabled="false"/>
+                        <p:outputLabel value="NOMBRE_TIPO_RESERVA" for="txtNombre"/>
+                        <h:inputText size="70" id="txtNombre"
+                                     value="#{frmTipoAsiento.registro.nombre}"/>
+                        <p:outputLabel for="chkActivo" value="ACTIVO"/>
+                        <h:selectBooleanCheckbox id="chkActivo"
+                                                 value="#{frmTipoAsiento.registro.activo}"/>
+                        <p:outputLabel for="txtComentarios" value="COMENTARIOS"/>
+                        <h:inputTextarea id="txtComentarios"
+                                         value="#{frmTipoAsiento.registro.comentarios}" cols="70" rows="3"/>
+                        <p:outputLabel for="txtExpresionRegular" value="EXPRESION_REGULAR" />
+                        <h:inputText id="txtExpresionRegular" value="#{frmTipoAsiento.registro.expresionRegular}" />
+                    </p:panelGrid>
+                    <h:panelGrid columns="3">
+                        <crud:botonesBotton frm="#{frmTipoAsiento}"/>
+                    </h:panelGrid>
+                </h:form>
+            </h:panelGroup>
+        </h:panelGrid>
+    </c:define>
+</c:composition>

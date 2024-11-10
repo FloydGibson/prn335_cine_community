@@ -4,22 +4,22 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui">
 <h:head>
-    <title>Tipo Sala</title>
+    <title>Tipo Producto</title>
 </h:head>
 <h:body>
     <h:form id="frmTable">
         <p:dataTable
-                value="#{frmTipoSala.modelo}"
+                value="#{frmTipoProducto.modelo}"
                 var="r"
                 rows="10"
                 lazy="true"
                 selectionMode="single"
-                selection="#{frmTipoSala.registro}"
+                selection="#{frmTipoProducto.registro}"
                 paginator="true"
         >
             <p:ajax event="rowSelect" update=":pnlDetalle" process="@this"/>
             <p:column headerText="ID">
-                <h:outputText value="#{r.idTipoSala}"/>
+                <h:outputText value="#{r.idTipoProducto}"/>
             </p:column>
             <p:column headerText="Nombre">
                 <h:outputText value="#{r.nombre}"/>
@@ -33,49 +33,49 @@
                              value="Nuevo"
                              process="@this"
                              update=":pnlDetalle"
-                             actionListener="#{frmTipoSala.btnNuevoHandler}"
+                             actionListener="#{frmTipoProducto.btnNuevoHandler}"
             />
             <p:commandButton
                     value="Cancelar"
                     ajax="true"
-                    actionListener="#{frmTipoSala.btnCancelarHandler}"
+                    actionListener="#{frmTipoProducto.btnCancelarHandler}"
                     update=":pnlDetalle"
                     process="@this"/>
         </h:panelGrid>
     </h:form>
     <h:panelGroup id="pnlDetalle" styleClass="detalle">
-        <h:form id="frmDetalle" styleClass="detalle" rendered="#{not empty frmTipoSala.registro}">
+        <h:form id="frmDetalle" styleClass="detalle" rendered="#{not empty frmTipoProducto.registro}">
             <p:panelGrid columns="2">
                 <p:outputLabel value="ID" for="txtIdTipoReserva"/>
                 <h:inputText id="txtIdTipoReserva"
-                             value="#{frmTipoSala.registro.idTipoSala}" readonly="true" disabled="true"/>
+                             value="#{frmTipoProducto.registro.idTipoProducto}" readonly="true" disabled="true"/>
                 <p:outputLabel value="Nombre" for="txtNombre"/>
                 <h:inputText size="70" id="txtNombre"
-                             value="#{frmTipoSala.registro.nombre}"/>
+                             value="#{frmTipoProducto.registro.nombre}"/>
                 <p:outputLabel for="chkActivo" value="Activo"/>
                 <h:selectBooleanCheckbox id="chkActivo"
-                                         value="#{frmTipoSala.registro.activo}"/>
+                                         value="#{frmTipoProducto.registro.activo}"/>
                 <p:outputLabel for="txtComentarios" value="Comentarios"/>
                 <h:inputTextarea id="txtComentarios"
-                                 value="#{frmTipoSala.registro.comentarios}" cols="70" rows="3"/>
+                                 value="#{frmTipoProducto.registro.comentarios}" cols="70" rows="3"/>
             </p:panelGrid>
             <h:panelGrid columns="3">
                 <p:commandButton value="Guarda" ajax="true"
                                  process="@form"
                                  update=":pnlDetalle :frmTable"
-                                 actionListener="#{frmTipoSala.btnCrearHandler}"
-                                 rendered="#{frmTipoSala.estado == 'CREAR'}"
+                                 actionListener="#{frmTipoProducto.btnCrearHandler}"
+                                 rendered="#{frmTipoProducto.estado == 'CREAR'}"
                 />
                 <p:commandButton value="Modificar" ajax="true"
                                  process="@form"
                                  update=":pnlDetalle :frmTable"
-                                 rendered="#{frmTipoSala.estado == 'MODIFICAR'}"
-                                 actionListener="#{frmTipoSala.btnModificarHandler}"/>
+                                 rendered="#{frmTipoProducto.estado == 'MODIFICAR'}"
+                                 actionListener="#{frmTipoProducto.btnModificarHandler}"/>
                 <p:commandButton value="Eliminar" ajax="true"
                                  process="@form"
                                  update=":pnlDetalle :frmTable"
-                                 rendered="#{frmTipoSala.estado == 'MODIFICAR'}"
-                                 actionListener="#{frmTipoSala.btnEliminarHandler}"/>
+                                 rendered="#{frmTipoProducto.estado == 'MODIFICAR'}"
+                                 actionListener="#{frmTipoProducto.btnEliminarHandler}"/>
             </h:panelGrid>
         </h:form>
     </h:panelGroup>

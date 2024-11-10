@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<c:composition xmlns="http://www.w3.org/1999/xhtml"
+               xmlns:f="http://xmlns.jcp.org/jsf/core"
+               xmlns:h="http://xmlns.jcp.org/jsf/html"
+               xmlns:p="http://primefaces.org/ui"
+               xmlns:crud="jakarta.faces.composite/crud"
+               xmlns:c="jakarta.faces.facelets"
+               template="WEB-INF/templates/principal.xhtml"
+>
+
+
+    <c:define name="titulo">
+        #{frmTipoPago.tituloPag}
+    </c:define>
+
+    <c:define name="cuerpo">
+        <h:panelGrid>
+            <h:panelGroup id="pnlTabla">
+                <h:form id="frmTable">
+
+                    <p:dataTable
+                            value="#{frmTipoPago.modelo}"
+                            var="r"
+                            rows="10"
+                            lazy="true"
+                            selectionMode="single"
+                            selection="#{frmTipoPago.registro}"
+                            paginator="true"
+                    >
+                        <p:ajax event="rowSelect" update=":pnlDetalle :pnlTabla" process="@this"/>
+                        <p:column headerText="ID">
+                            <h:outputText value="#{r.idTipoPago}"/>
+                        </p:column>
+                        <p:column headerText="Nombre">
+                            <h:outputText value="#{r.nombre}"/>
+                        </p:column>
+
+                    </p:dataTable>
+                    <h:panelGrid columns="2">
+                        <crud:botonesTop frm="#{frmTipoPago}"/>
+                    </h:panelGrid>
+
+                </h:form>
+            </h:panelGroup>
+        </h:panelGrid>
+        <h:panelGroup id="pnlDetalle" styleClass="detalle">
+            <h:form id="frmDetalle" styleClass="detalle" rendered="#{not empty frmTipoPago.registro or frmTipoPago.estado == 'CREAR'}">
+                <p:panelGrid columns="2">
+                    <p:outputLabel value="ID" for="txtIdTipoReserva"/>
+                    <h:inputText id="txtIdTipoReserva"
+                                 value="#{frmTipoPago.registro.idTipoPago}" readonly="true" disabled="true"/>
+                    <p:outputLabel value="Nombre" for="txtNombre"/>
+                    <h:inputText size="70" id="txtNombre"
+                                 value="#{frmTipoPago.registro.nombre}"/>
+                    <p:outputLabel for="chkActivo" value="Activo"/>
+                    <h:selectBooleanCheckbox id="chkActivo" value="#{frmTipoPago.registro.activo}"/>
+                </p:panelGrid>
+                <h:panelGrid columns="3">
+                    <crud:botonesBotton frm="#{frmTipoPago}" />
+                </h:panelGrid>
+            </h:form>
+        </h:panelGroup>
+    </c:define>
+</c:composition>

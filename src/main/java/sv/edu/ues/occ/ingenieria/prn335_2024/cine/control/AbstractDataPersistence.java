@@ -180,7 +180,7 @@ public abstract class AbstractDataPersistence<T> {
     }
 
     public String imprimirCarnet(){
-        return "MM23012";
+        return "OC22002";
     }
 
     public Class getTipoDatos() {

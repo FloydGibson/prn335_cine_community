@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Created by IntelliJ IDEA.
+  User: wilmer
+  Date: 9/11/24
+  Time: 19:10
+-->
+<ui:component
+        xmlns:ui="jakarta.faces.facelets"
+        xmlns:cc="jakarta.faces.composite"
+        xmlns:h="jakarta.faces.html"
+        xmlns:p="primefaces">
+
+
+    <cc:interface>
+        <cc:attribute name="frm"
+                      type="sv.edu.ues.occ.ingenieria.prn335_2024.cine.boundary.jsf.AbstractFrm"
+                      required="true"
+                      displayName="Formulario"
+                      shortDescription="Formulario sobre el que se opera"/>
+        <cc:attribute name="actualizar"
+                      default=":pnlDetalle :pnlTabla"
+                      required="false"
+                      displayName="Componentes a actualizar"
+                      shortDescription="Define el area a refrescar por el componente"
+        />
+    </cc:interface>
+    <cc:implementation>
+
+        <h:panelGrid columns="#{cc.attrs.frm.estado!='CREAR'?'2':'1'}">
+            <p:commandButton value="#{abstractpffrm['abstractpffrm.create']}  #{cc.attrs.frm.tituloDePagina}" ajax="true"
+                             process="@form" update="#{cc.attrs.actualizar}"
+                             rendered="#{cc.attrs.frm.estado=='CREAR'}"
+                             actionListener="#{cc.attrs.frm.btnCrearHandler}"
+            />
+            <p:commandButton value="#{abstractpffrm['abstractpffrm.update']}  #{cc.attrs.frm.tituloDePagina}" ajax="true"
+                             process="@form" update="#{cc.attrs.actualizar}"
+                             rendered="#{cc.attrs.frm.estado=='Modificar'}"
+                             actionListener="#{cc.attrs.frm.btnModificarHandler}"
+            />
+            <p:commandButton value="#{abstractpffrm['abstractpffrm.delete']}  #{cc.attrs.frm.tituloDePagina}" ajax="true"
+                             process="@form" update=":#{cc.attrs.actualizar}"
+                             rendered="#{cc.attrs.frm.estado=='Modificar'}"
+                             actionListener="#{cc.attrs.frm.btnEliminarHandler}"
+            />
+        </h:panelGrid>
+
+
+
+    </cc:implementation>
+
+
+
+
+</ui:component>

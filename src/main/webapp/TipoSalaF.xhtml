@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <!--
+      Created by IntelliJ IDEA.
+      User: everg
+      Date: 17/9/24
+      Time: 10:22
+    -->
+    <html xmlns="http://www.w3.org/1999/xhtml"
+          xmlns:f="http://xmlns.jcp.org/jsf/core"
+          xmlns:h="http://xmlns.jcp.org/jsf/html"><!-- Espacion de nombres: Importar una librería
+          con h: puedo usar los componentes que están en esa librería-->
+
+    <h:head>
+
+        <title>Tipo Sala</title>
+        <style type="text/css">
+
+            table {
+                border-collapse: collapse;
+                background-color: white;
+                overflow: hidden;
+                width: 500px;
+                border-radius: 10px;
+            }
+
+            th, td {
+                font-family: 'Motnserrat', sans-serif;
+                text-align: left;
+                font-size: 12px;
+                padding: 10px;
+            }
+
+            th {
+                background-color: #7691ab;
+                color: white;
+            }
+        </style>
+    </h:head>
+
+    <h:body>
+        <h1>Tipo Sala</h1>
+
+        <h:form id="frmTabla">
+            <h:dataTable value="#{frmTipoSalaF.registros}" var="r">
+                <h:column>
+                    <f:facet name="header">
+                        Id
+                    </f:facet>
+                    <h:outputText value="#{r.idTipoSala}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Nombre
+                    </f:facet>
+                    <h:outputText value="#{r.nombre}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Estado
+                    </f:facet>
+                    <h:outputText value="#{r.activo?'ACTIVO':'INACTIVO'}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Expresion Regular
+                    </f:facet>
+                    <h:outputText value="#{r.expresionRegular} "/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Comentarios
+                    </f:facet>
+                    <h:outputText value="#{r.comentarios} "/>
+                </h:column>
+                <h:column>
+                    <h:commandButton value="Seleccionar"
+                                     actionListener="#{frmTipoSalaF.btnSeleccionarRegistroHandler(r.idTipoSala)}">
+                        <f:ajax render="pnlDetalle" execute="@form"/>
+                    </h:commandButton>
+
+                </h:column>
+            </h:dataTable>
+            <h:panelGroup>
+                <h:commandButton value="Cancelar" actionListener="#{frmTipoSalaF.btnCancelarHandler}"/>
+                <h:commandButton value="Nuevo" actionListener="#{frmTipoSalaF.btnNuevoHandler}"/>
+            </h:panelGroup>
+
+        </h:form>
+        <h:panelGroup id="pnlDetalle">
+
+            <h:form id="frmDetalle" rendered="#{not empty frmTipoSalaF.registro}">
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="ID" for="txtId"/>
+                    <h:inputText id="txtId" value="#{frmTipoSalaF.registro.idTipoSala}" readonly="true" disabled="true"/>
+                    <h:outputLabel value="Nombre" for="txtNombre"/>
+                    <h:inputText size="70" id="txtNombre" value="#{frmTipoSalaF.registro.nombre}"/>
+                    <h:outputLabel for="chkActivo" value="Activo"/>
+                    <h:selectBooleanCheckbox id="chkActivo" value="#{frmTipoSalaF.registro.activo}"/>
+                    <h:outputLabel for="txtExpresionRegular" value="Expresion Regular"/>
+                    <h:inputText id="txtExpresionRegular" value="#{frmTipoSalaF.registro.expresionRegular}" size="70"/>
+                    <h:outputLabel for="txtComentarios" value="Comentarios"/>
+                    <h:inputTextarea id="txtComentarios" value="#{frmTipoSalaF.registro.comentarios}" cols="70" rows="3"/>
+                </h:panelGrid>
+                <h:panelGrid>
+                    <h:messages showSummary="true" showDetail="true"/>
+                    <h:commandButton value="Guardar" actionListener="#{frmTipoSalaF.btnGuardarHandler}" rendered="#{frmTipoSalaF.estado=='CREAR'}"/>
+                    <h:commandButton value="Modificar" actionListener="#{frmTipoSalaF.btnModificarHandler}" rendered="#{frmTipoSalaF.estado=='MODIFICAR'}"/>
+                    <h:commandButton value="Eliminar" actionListener="#{frmTipoSalaF.btnEliminarHandler}" rendered="#{frmTipoSalaF.estado=='MODIFICAR'}"/>
+                </h:panelGrid>
+            </h:form>
+        </h:panelGroup>
+
+
+    </h:body>
+
+    </html>

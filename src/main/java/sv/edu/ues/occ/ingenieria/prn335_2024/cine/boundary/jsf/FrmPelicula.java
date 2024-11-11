@@ -13,7 +13,7 @@ import java.io.Serializable;
 
 @Named
 @ViewScoped
-public class FrmPelicula extends AbstractPfFrm<Pelicula> implements Serializable {
+public class FrmPelicula extends AbstractFrm<Pelicula> implements Serializable {
 
     @Inject
     PeliculaBean pBean;
@@ -32,29 +32,28 @@ public class FrmPelicula extends AbstractPfFrm<Pelicula> implements Serializable
         }
     }
 
-
     @Override
-    public String getTituloPag() {
+    public String getTituloDePagina() {
         return "Pelicula";
     }
 
     @Override
-    public Object getId(Pelicula object) {
+    protected Object getId(Pelicula object) {
         return object.getIdPelicula();
     }
 
     @Override
-    public Pelicula createNewEntity() {
+    protected Pelicula createNewRegistro() {
         return new Pelicula();
     }
 
     @Override
-    public AbstractDataPersistence<Pelicula> getDataBean() {
+    protected AbstractDataPersistence<Pelicula> getDataBean() {
         return pBean;
     }
 
     @Override
-    public FacesContext getFacesContext() {
+    protected FacesContext getContext() {
         return facesContext;
     }
 
@@ -79,18 +78,5 @@ public class FrmPelicula extends AbstractPfFrm<Pelicula> implements Serializable
 
     public FrmPeliculaCaracteristica getFrmPeliculaCaracteristica() {
         return frmPeliculaCaracteristica;
-    }
-
-    public PeliculaBean getpBean() {
-        return pBean;
-    }
-
-    public void setpBean(PeliculaBean pBean) {
-        this.pBean = pBean;
-    }
-
-
-    public void setFrmPeliculaCaracteristica(FrmPeliculaCaracteristica frmPeliculaCaracteristica) {
-        this.frmPeliculaCaracteristica = frmPeliculaCaracteristica;
     }
 }

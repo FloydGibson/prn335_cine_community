@@ -8,39 +8,21 @@ import sv.edu.ues.occ.ingenieria.prn335_2024.cine.control.AbstractDataPersistenc
 import sv.edu.ues.occ.ingenieria.prn335_2024.cine.control.TipoSalaBean;
 import sv.edu.ues.occ.ingenieria.prn335_2024.cine.entity.TipoSala;
 
+import java.io.Serializable;
+
 @Named
 @ViewScoped
-public class FrmTipoSala extends AbstractPfFrm<TipoSala> {
+public class FrmTipoSala extends AbstractFrm<TipoSala> implements Serializable {
 
     @Inject
-    TipoSalaBean tslBean;
+    TipoSalaBean tsBean;
 
     @Inject
     FacesContext facesContext;
 
     @Override
-    public FacesContext getFacesContext() {
-        return facesContext;
-    }
-
-    @Override
-    public AbstractDataPersistence<TipoSala> getDataBean(){
-        return tslBean;
-    }
-
-    @Override
-    public TipoSala createNewEntity(){
-        return new TipoSala();
-    }
-
-    @Override
-    public Object getId(TipoSala o){
-        return o.getIdTipoSala();
-    }
-
-    @Override
-    public String getTituloPag(){
-        return "Tipo Sala";
+    public String buscarIdPorRegistro(TipoSala entity) {
+        return "";
     }
 
     @Override
@@ -49,7 +31,27 @@ public class FrmTipoSala extends AbstractPfFrm<TipoSala> {
     }
 
     @Override
-    public String buscarIdPorRegistro(TipoSala entity) {
-        return "";
+    public String getTituloDePagina() {
+        return "tipo sala";
+    }
+
+    @Override
+    protected Object getId(TipoSala sala) {
+        return sala.getIdTipoSala();
+    }
+
+    @Override
+    protected TipoSala createNewRegistro() {
+        return new TipoSala();
+    }
+
+    @Override
+    public AbstractDataPersistence<TipoSala> getDataBean() {
+        return tsBean;
+    }
+
+    @Override
+    protected FacesContext getContext() {
+        return facesContext.getCurrentInstance();
     }
 }

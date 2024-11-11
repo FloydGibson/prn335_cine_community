@@ -7,13 +7,12 @@ import jakarta.inject.Named;
 import sv.edu.ues.occ.ingenieria.prn335_2024.cine.control.AbstractDataPersistence;
 import sv.edu.ues.occ.ingenieria.prn335_2024.cine.control.TipoPagoBean;
 import sv.edu.ues.occ.ingenieria.prn335_2024.cine.entity.TipoPago;
-import sv.edu.ues.occ.ingenieria.prn335_2024.cine.entity.TipoPelicula;
 
 import java.io.Serializable;
 
 @Named
 @ViewScoped
-public class FrmTipoPago extends AbstractPfFrm<TipoPago> implements Serializable {
+public class FrmTipoPago extends AbstractFrm<TipoPago> implements Serializable {
 
     @Inject
     TipoPagoBean tpBean;
@@ -22,39 +21,34 @@ public class FrmTipoPago extends AbstractPfFrm<TipoPago> implements Serializable
     FacesContext facesContext;
 
     @Override
-    public FacesContext getFacesContext() {
-        return facesContext;
+    public String buscarIdPorRegistro(TipoPago entity){
+        return "";
+    }
+    @Override
+    public TipoPago buscarRegistroPorId(String id){
+        return null;
+    }
+    @Override
+    public String getTituloDePagina() {
+        return "tipo pago";
     }
 
     @Override
-    public AbstractDataPersistence<TipoPago> getDataBean(){
-        return tpBean;
+    protected Object getId(TipoPago pago) {
+        return pago.getIdTipoPago();
     }
 
     @Override
-    public TipoPago createNewEntity(){
+    protected TipoPago createNewRegistro() {
         return new TipoPago();
     }
 
     @Override
-    public Object getId(TipoPago o){
-        return o.getIdTipoPago().toString();
+    protected AbstractDataPersistence<TipoPago> getDataBean() {
+        return tpBean;
     }
-
     @Override
-    public String getTituloPag(){
-        return "Tipo Pago";
+    protected FacesContext getContext() {
+        return facesContext;
     }
-
-    @Override
-    public TipoPago buscarRegistroPorId(String id) {
-        return null;
-    }
-
-    @Override
-    public String buscarIdPorRegistro(TipoPago entity) {
-        return "";
-    }
-
-
 }

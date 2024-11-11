@@ -1,92 +1,129 @@
 package sv.edu.ues.occ.ingenieria.prn335_2024.cine.boundary.jsf;
 
-
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.Dependent;
 import jakarta.faces.application.FacesMessage;
+import jakarta.faces.component.UIComponent;
+import jakarta.faces.component.UIInput;
 import jakarta.faces.context.FacesContext;
-import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import sv.edu.ues.occ.ingenieria.prn335_2024.cine.control.AbstractDataPersistence;
-import sv.edu.ues.occ.ingenieria.prn335_2024.cine.control.SalaBean;
 import sv.edu.ues.occ.ingenieria.prn335_2024.cine.control.SalaCaracteristicaBean;
 import sv.edu.ues.occ.ingenieria.prn335_2024.cine.control.TipoSalaBean;
-import sv.edu.ues.occ.ingenieria.prn335_2024.cine.entity.*;
+import sv.edu.ues.occ.ingenieria.prn335_2024.cine.entity.Sala;
+import sv.edu.ues.occ.ingenieria.prn335_2024.cine.entity.SalaCaracteristica;
+import sv.edu.ues.occ.ingenieria.prn335_2024.cine.entity.TipoSala;
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Named
 @Dependent
-public class FrmSalaCaracteristica extends AbstractPfFrm<SalaCaracteristica> implements Serializable {
-
+public class FrmSalaCaracteristica extends AbstractFrm<SalaCaracteristica> implements Serializable {
+    @Inject
+    TipoSalaBean tsBean;
 
     @Inject
-    SalaCaracteristicaBean salCBean;
-
-    @Inject
-    TipoSalaBean tipoSalaBean;
+    SalaCaracteristicaBean scBean;
 
     @Inject
     FacesContext facesContext;
 
+    List<TipoSala> tipoSalasList;
 
-    List<TipoSala> tipoSalaList;
-    int idSala;
-
-    //Esta madre sirve para las queries no?
-
+    Integer idSala;
 
     @PostConstruct
-    public void inicializar(){
+    public void inicializar() {
         super.inicializar();
-        try{
-            this.tipoSalaList = tipoSalaBean.findRange(0,Integer.MAX_VALUE);
+        try {
+            this.tipoSalasList = tsBean.findRange(0, Integer.MAX_VALUE);
+        } catch (Exception e) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+            enviarMensaje("Error al cargar los tipos", "Error al cargar", FacesMessage.SEVERITY_ERROR);
+        }
+    }
+
+
+    @Override
+    public List<SalaCaracteristica> cargarDatos(int firstResult, int maxResults){
+        try {
+            if(this.idSala!=null && this.scBean!=null){
+                return scBean.findByIdSala(this.idSala, firstResult, maxResults);
+            }
         }catch (Exception e){
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
-            enviarMensaje("FrmSalaC","El init", FacesMessage.SEVERITY_ERROR);
         }
+        return List.of();
     }
 
     @Override
-    public SalaCaracteristica createNewEntity() {
-        SalaCaracteristica sc = new SalaCaracteristica();
-        if (idSala >= 0) {
-            sc.setIdSala(new Sala(idSala));
+    public int contar(){
+        try {
+            if(this.idSala!=null && this.scBean!=null){
+                return scBean.countSala(this.idSala);
+            }
+        }catch (Exception e){
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
         }
-        if (tipoSalaList != null && !tipoSalaList.isEmpty()) {
-            sc.setIdTipoSala(tipoSalaList.getFirst());
+        return 0;
+    }
+
+    @Override
+    public String getTituloDePagina(){return "Tipo de Sala";}
+
+    @Override
+    protected Object getId(SalaCaracteristica peliculaCaracteristica) {
+        return peliculaCaracteristica.getIdSalaCaracteristica();
+    }
+
+    @Override
+    protected  SalaCaracteristica createNewRegistro(){
+        SalaCaracteristica pc = new SalaCaracteristica();
+        if (idSala != null) {
+            pc.setIdSala(new Sala(idSala));
         }
-        return sc;
+        if (tipoSalasList != null && tipoSalasList.isEmpty()) {
+            pc.setIdTipoSala(tipoSalasList.getFirst());
+        }
+        return pc;
     }
 
     @Override
-    public FacesContext getFacesContext() {
-        return facesContext;
+    protected AbstractDataPersistence<SalaCaracteristica> getDataBean() {
+        return scBean;
     }
 
     @Override
-    public AbstractDataPersistence<SalaCaracteristica> getDataBean(){
-        return salCBean;
-    }
-
-
+    protected FacesContext getContext(){return facesContext;}
 
     @Override
-    public Object getId(SalaCaracteristica o){
-        return o.getIdSalaCaracteristica().toString();
+    public SalaCaracteristica buscarRegistroPorId(String id){
+        if(id!=null && this.modelo!=null){
+            return this.modelo.getWrappedData().stream()
+                    .filter(r ->r.getIdSalaCaracteristica().toString().equals(id)).findFirst().orElse(null);
+        }
+        return null;
     }
 
     @Override
-    public String getTituloPag(){
-        return "Sala Caracteristica";
+    public String buscarIdPorRegistro(SalaCaracteristica dato){
+        if(dato!=null && dato.getIdSalaCaracteristica()!=null){
+            return dato.getIdSalaCaracteristica().toString();
+        }
+        return null;
     }
 
+    public Integer getIdSala() {return idSala;}
 
+    public void setIdSala(Integer idSala) {this.idSala = idSala;}
 
+    public List<TipoSala> getTipoSalasList() {return tipoSalasList;}
 
     public Integer getIdTipoSalaSeleccionado() {
         if (this.registro != null && this.registro.getIdTipoSala() != null) {
@@ -96,92 +133,34 @@ public class FrmSalaCaracteristica extends AbstractPfFrm<SalaCaracteristica> imp
     }
 
     public void setIdTipoSalaSeleccionado(final Integer idTipoSala) {
-        if (this.registro != null && this.tipoSalaList != null && !this.tipoSalaList.isEmpty()) {
-            this.registro.setIdTipoSala(this.tipoSalaList.stream()
+        if (this.registro != null && this.tipoSalasList != null && !this.tipoSalasList.isEmpty()) {
+            this.registro.setIdTipoSala(this.tipoSalasList.stream()
                     .filter(r -> r.getIdTipoSala().equals(idTipoSala))
                     .findFirst()
                     .orElse(null));
         }
     }
+    public void setTipoSalasList(List<TipoSala> tipoSalasList) {
+        this.tipoSalasList = tipoSalasList;
+    }
 
-    @Override
-    public int contar() {
-        try {
-            if (salCBean != null) {
-                return salCBean.countSala(this.idSala);
+    public void validarValor(FacesContext fc, UIComponent componente, Object valor) {
+        UIInput input = (UIInput) componente;
+        if (registro != null && this.registro.getIdTipoSala() != null) {
+            String nuevo = valor.toString();
+            Pattern patron = Pattern.compile(this.registro.getIdTipoSala().getExpresionRegular());
+            Matcher validator = patron.matcher(nuevo);
+            if (validator.find()) {
+                input.setValid(true);
+                return;
             }
-        } catch (Exception e) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
         }
-        return 0;
-    }
 
-    @Override
-    public List<SalaCaracteristica> cargarDatos(int firstResult, int maxResult) {
-        try {
-            if (salCBean != null) {
-                return salCBean.findByIdSala(this.idSala, firstResult, maxResult);
-            }
-        } catch (Exception e) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
-        }
-        return List.of();
-    }
+        input.setValid(false);
 
-    @Override
-    public SalaCaracteristica buscarRegistroPorId(String id) {
-        if (id != null && this.modelo != null) {
-            return this.modelo.getWrappedData().stream()
-                    .filter(r -> r.getIdSalaCaracteristica().toString().equals(id))
-                    .findFirst()
-                    .orElse(null);
-        }
-        return null;
-    }
+        FacesContext.getCurrentInstance().addMessage(null,
+                new FacesMessage(FacesMessage.SEVERITY_ERROR, "Advertencia", "Valor ingresado inválido."));
 
-    @Override
-    public String buscarIdPorRegistro(SalaCaracteristica dato) {
-        if (dato != null && dato.getIdSalaCaracteristica() != null) {
-            return dato.getIdSalaCaracteristica().toString();
-        }
-        return null;
     }
-
-    public SalaCaracteristicaBean getSalCBean() {
-        return salCBean;
-    }
-
-    public void setSalCBean(SalaCaracteristicaBean salCBean) {
-        this.salCBean = salCBean;
-    }
-
-    public void setFacesContext(FacesContext facesContext) {
-        this.facesContext = facesContext;
-    }
-
-    public int getIdSala() {
-        return idSala;
-    }
-
-    public void setIdSala(int idSala) {
-        this.idSala = idSala;
-    }
-
-    public TipoSalaBean getTipoSalaBean() {
-        return tipoSalaBean;
-    }
-
-    public void setTipoSalaBean(TipoSalaBean tipoSalaBean) {
-        this.tipoSalaBean = tipoSalaBean;
-    }
-
-    public List<TipoSala> getTipoSalaList() {
-        return tipoSalaList;
-    }
-
-    public void setTipoSalaList(List<TipoSala> tipoSalaList) {
-        this.tipoSalaList = tipoSalaList;
-    }
-
 
 }

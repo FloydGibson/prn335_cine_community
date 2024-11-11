@@ -8,39 +8,21 @@ import sv.edu.ues.occ.ingenieria.prn335_2024.cine.control.AbstractDataPersistenc
 import sv.edu.ues.occ.ingenieria.prn335_2024.cine.control.TipoPeliculaBean;
 import sv.edu.ues.occ.ingenieria.prn335_2024.cine.entity.TipoPelicula;
 
+import java.io.Serializable;
+
 @Named
 @ViewScoped
-public class FrmTipoPelicula extends AbstractPfFrm<TipoPelicula> {
+public class FrmTipoPelicula extends AbstractFrm<TipoPelicula> implements Serializable {
 
     @Inject
-    TipoPeliculaBean tplBean;
+    TipoPeliculaBean tpBean;
 
     @Inject
     FacesContext facesContext;
 
     @Override
-    public FacesContext getFacesContext() {
-        return facesContext;
-    }
-
-    @Override
-    public AbstractDataPersistence<TipoPelicula> getDataBean(){
-        return tplBean;
-    }
-
-    @Override
-    public TipoPelicula createNewEntity(){
-        return new TipoPelicula();
-    }
-
-    @Override
-    public Object getId(TipoPelicula o){
-        return o.getIdTipoPelicula();
-    }
-
-    @Override
-    public String getTituloPag(){
-        return "Tipo Pelicula";
+    public String buscarIdPorRegistro(TipoPelicula entity) {
+        return "";
     }
 
     @Override
@@ -49,9 +31,27 @@ public class FrmTipoPelicula extends AbstractPfFrm<TipoPelicula> {
     }
 
     @Override
-    public String buscarIdPorRegistro(TipoPelicula entity) {
-        return "";
+    public String getTituloDePagina() {
+        return "tipo pelicula";
     }
 
+    @Override
+    protected Object getId(TipoPelicula pelicula) {
+        return pelicula.getIdTipoPelicula();
+    }
 
+    @Override
+    protected TipoPelicula createNewRegistro() {
+        return new TipoPelicula();
+    }
+
+    @Override
+    protected AbstractDataPersistence<TipoPelicula> getDataBean() {
+        return tpBean;
+    }
+
+    @Override
+    protected FacesContext getContext() {
+        return facesContext;
+    }
 }

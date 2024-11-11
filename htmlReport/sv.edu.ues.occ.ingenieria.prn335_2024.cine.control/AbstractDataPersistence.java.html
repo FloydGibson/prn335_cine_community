@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AbstractDataPersistence.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jacoco.exec</a> &gt; <a href="index.source.html" class="el_package">sv.edu.ues.occ.ingenieria.prn335_2024.cine.control</a> &gt; <span class="el_source">AbstractDataPersistence.java</span></div><h1>AbstractDataPersistence.java</h1><pre class="source lang-java linenums">package sv.edu.ues.occ.ingenieria.prn335_2024.cine.control;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
+
+import java.util.List;
+
+public abstract class AbstractDataPersistence&lt;T&gt; {
+
+    public abstract EntityManager getEntityManager();
+
+
+    Class tipoDatos;
+
+<span class="fc" id="L18">    public AbstractDataPersistence(Class tipoDatos) {</span>
+<span class="fc" id="L19">        this.tipoDatos = tipoDatos;</span>
+<span class="fc" id="L20">    }</span>
+
+
+    public void create(T entity) throws IllegalArgumentException, IllegalStateException {
+
+<span class="fc" id="L25">        EntityManager em = null;</span>
+<span class="fc" id="L26">        em = getEntityManager();</span>
+
+<span class="fc bfc" id="L28" title="All 2 branches covered.">        if (entity == null) {</span>
+<span class="fc" id="L29">            throw new IllegalArgumentException(&quot;Entity null no puede ser persistir&quot;);</span>
+        }
+
+        try {
+<span class="fc" id="L33">            em.persist(entity);</span>
+<span class="fc" id="L34">        } catch (Exception e) {</span>
+
+<span class="fc" id="L36">            throw new IllegalStateException(&quot;Error acceder repositorio&quot;, e);</span>
+<span class="fc" id="L37">        }</span>
+<span class="fc" id="L38">    }</span>
+
+
+    public void delete(T entity) throws IllegalStateException, IllegalArgumentException {
+<span class="fc" id="L42">        EntityManager em = null;</span>
+<span class="fc bfc" id="L43" title="All 2 branches covered.">        if (entity == null) {</span>
+<span class="fc" id="L44">            throw new IllegalArgumentException(&quot;Entity null no puede ser persistir&quot;);</span>
+        }
+        try {
+<span class="fc" id="L47">            em = getEntityManager();</span>
+<span class="fc bfc" id="L48" title="All 2 branches covered.">            if (em == null) {</span>
+<span class="fc" id="L49">                throw new IllegalStateException(&quot;Error al acceder al repositorio&quot;);</span>
+            }
+
+<span class="fc" id="L52">            em.remove(entity);</span>
+<span class="fc" id="L53">        } catch (Exception e) {</span>
+<span class="fc" id="L54">            throw new IllegalStateException(&quot;Error al acceder al repositorio&quot;, e);</span>
+<span class="fc" id="L55">        }</span>
+<span class="fc" id="L56">    }</span>
+
+
+    public T update(T entity) throws IllegalStateException, IllegalArgumentException {
+<span class="fc" id="L60">        EntityManager em = null;</span>
+<span class="fc bfc" id="L61" title="All 2 branches covered.">        if (entity == null) {</span>
+<span class="fc" id="L62">            throw new IllegalArgumentException(&quot;Entidad nula&quot;);</span>
+        }
+        try {
+<span class="fc" id="L65">            em = getEntityManager();</span>
+<span class="fc bfc" id="L66" title="All 2 branches covered.">            if (em == null) {</span>
+<span class="fc" id="L67">                throw new IllegalStateException(&quot;Error al acceder al repositorio&quot;);</span>
+            }
+<span class="fc" id="L69">            T updatedEntity = em.merge(entity);</span>
+<span class="fc" id="L70">            return updatedEntity;</span>
+<span class="fc" id="L71">        } catch (Exception e) {</span>
+
+<span class="fc" id="L73">            throw new IllegalStateException(&quot;Error al acceder al repositorio&quot;, e);</span>
+        }
+    }
+
+
+    public T findById(final Object idTipo) throws IllegalArgumentException, IllegalStateException {
+<span class="fc" id="L79">        EntityManager em = null;</span>
+<span class="fc bfc" id="L80" title="All 2 branches covered.">        if (idTipo == null) {</span>
+<span class="fc" id="L81">            throw new IllegalArgumentException(&quot;Tipo de sala no encontrado&quot;);</span>
+        }
+        try {
+<span class="fc" id="L84">            em = getEntityManager();</span>
+<span class="fc bfc" id="L85" title="All 2 branches covered.">            if (em == null) {</span>
+<span class="fc" id="L86">                throw new IllegalStateException(&quot;No se encontro el EntityManager&quot;);</span>
+            }
+<span class="fc" id="L88">        } catch (Exception ex) {</span>
+<span class="fc" id="L89">            throw new IllegalStateException(&quot;No se encontró el entity manager&quot;, ex);</span>
+<span class="fc" id="L90">        }</span>
+
+
+<span class="fc" id="L93">        return (T) em.find(tipoDatos, idTipo);</span>
+
+
+
+    }
+
+    public List&lt;T&gt; findRange(int min, int max) {
+
+<span class="fc bfc" id="L101" title="All 4 branches covered.">        if (min &lt; 0 || max &lt; 0) {</span>
+<span class="fc" id="L102">            throw new IllegalArgumentException(&quot;Ambos parametros tienen que ser positivos.&quot;);</span>
+        }
+
+
+<span class="fc" id="L106">        EntityManager em = getEntityManager();</span>
+<span class="fc bfc" id="L107" title="All 2 branches covered.">        if (em == null) {</span>
+<span class="fc" id="L108">            throw new IllegalStateException(&quot;El EntityManager no se invoco correctamente.&quot;);</span>
+        }
+
+
+<span class="fc" id="L112">        CriteriaBuilder cb = em.getCriteriaBuilder();</span>
+<span class="fc" id="L113">        CriteriaQuery&lt;T&gt; q = cb.createQuery(tipoDatos);</span>
+<span class="fc" id="L114">        Root&lt;T&gt; raiz = q.from(tipoDatos);</span>
+<span class="fc" id="L115">        q.select(raiz);</span>
+
+
+<span class="fc" id="L118">        TypedQuery&lt;T&gt; query = em.createQuery(q);</span>
+<span class="fc" id="L119">        query.setFirstResult(min);</span>
+<span class="fc" id="L120">        query.setMaxResults(max);</span>
+
+<span class="fc" id="L122">        return query.getResultList();</span>
+    }
+
+
+
+
+
+    public Long count() throws IllegalStateException {
+<span class="fc" id="L130">        EntityManager em = null;</span>
+
+        try {
+<span class="fc" id="L133">            em = getEntityManager();</span>
+
+<span class="fc bfc" id="L135" title="All 2 branches covered.">            if (em == null) {</span>
+<span class="fc" id="L136">                throw new IllegalStateException(&quot;Error al acceder al repositorio&quot;);</span>
+            }
+
+<span class="fc" id="L139">            CriteriaBuilder cb = em.getCriteriaBuilder();</span>
+<span class="fc" id="L140">            CriteriaQuery&lt;Long&gt; q = cb.createQuery(Long.class);</span>
+<span class="fc" id="L141">            Root&lt;T&gt; raiz = q.from(tipoDatos);</span>
+<span class="fc" id="L142">            q.select(cb.count(raiz));</span>
+
+<span class="fc" id="L144">            TypedQuery&lt;Long&gt; query = em.createQuery(q);</span>
+<span class="fc" id="L145">            return query.getSingleResult();</span>
+
+<span class="fc" id="L147">        } catch (Exception e) {</span>
+<span class="fc" id="L148">            throw new IllegalStateException(&quot;Error al acceder al repositorio&quot;, e);</span>
+        }
+
+    }
+
+    public String imprimirCarnet() {
+<span class="fc" id="L154">        return &quot;OC22002&quot;;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

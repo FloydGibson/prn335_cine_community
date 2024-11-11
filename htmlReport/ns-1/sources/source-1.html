@@ -1,0 +1,272 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AbstractDataPersistence</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">sv.edu.ues.occ.ingenieria.prn335_2024.cine.control</a>
+</div>
+
+<h1>Coverage Summary for Class: AbstractDataPersistence (sv.edu.ues.occ.ingenieria.prn335_2024.cine.control)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AbstractDataPersistence</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (22/22)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (63/63)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package sv.edu.ues.occ.ingenieria.prn335_2024.cine.control;
+&nbsp;
+&nbsp;import jakarta.persistence.EntityManager;
+&nbsp;import jakarta.persistence.TypedQuery;
+&nbsp;import jakarta.persistence.criteria.CriteriaBuilder;
+&nbsp;import jakarta.persistence.criteria.CriteriaQuery;
+&nbsp;import jakarta.persistence.criteria.Root;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;public abstract class AbstractDataPersistence&lt;T&gt; {
+&nbsp;
+&nbsp;    public abstract EntityManager getEntityManager();
+&nbsp;
+&nbsp;
+&nbsp;    Class tipoDatos;
+&nbsp;
+<b class="fc">&nbsp;    public AbstractDataPersistence(Class tipoDatos) {</b>
+<b class="fc">&nbsp;        this.tipoDatos = tipoDatos;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    public void create(T entity) throws IllegalArgumentException, IllegalStateException {
+&nbsp;
+<b class="fc">&nbsp;        EntityManager em = null;</b>
+<b class="fc">&nbsp;        em = getEntityManager();</b>
+&nbsp;
+<b class="fc">&nbsp;        if (entity == null) {</b>
+<b class="fc">&nbsp;            throw new IllegalArgumentException(&quot;Entity null no puede ser persistir&quot;);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        try {
+<b class="fc">&nbsp;            em.persist(entity);</b>
+<b class="fc">&nbsp;        } catch (Exception e) {</b>
+&nbsp;
+<b class="fc">&nbsp;            throw new IllegalStateException(&quot;Error acceder repositorio&quot;, e);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    public void delete(T entity) throws IllegalStateException, IllegalArgumentException {
+<b class="fc">&nbsp;        EntityManager em = null;</b>
+<b class="fc">&nbsp;        if (entity == null) {</b>
+<b class="fc">&nbsp;            throw new IllegalArgumentException(&quot;Entity null no puede ser persistir&quot;);</b>
+&nbsp;        }
+&nbsp;        try {
+<b class="fc">&nbsp;            em = getEntityManager();</b>
+<b class="fc">&nbsp;            if (em == null) {</b>
+<b class="fc">&nbsp;                throw new IllegalStateException(&quot;Error al acceder al repositorio&quot;);</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            em.remove(entity);</b>
+<b class="fc">&nbsp;        } catch (Exception e) {</b>
+<b class="fc">&nbsp;            throw new IllegalStateException(&quot;Error al acceder al repositorio&quot;, e);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    public T update(T entity) throws IllegalStateException, IllegalArgumentException {
+<b class="fc">&nbsp;        EntityManager em = null;</b>
+<b class="fc">&nbsp;        if (entity == null) {</b>
+<b class="fc">&nbsp;            throw new IllegalArgumentException(&quot;Entidad nula&quot;);</b>
+&nbsp;        }
+&nbsp;        try {
+<b class="fc">&nbsp;            em = getEntityManager();</b>
+<b class="fc">&nbsp;            if (em == null) {</b>
+<b class="fc">&nbsp;                throw new IllegalStateException(&quot;Error al acceder al repositorio&quot;);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            T updatedEntity = em.merge(entity);</b>
+<b class="fc">&nbsp;            return updatedEntity;</b>
+<b class="fc">&nbsp;        } catch (Exception e) {</b>
+&nbsp;
+<b class="fc">&nbsp;            throw new IllegalStateException(&quot;Error al acceder al repositorio&quot;, e);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    public T findById(final Object idTipo) throws IllegalArgumentException, IllegalStateException {
+<b class="fc">&nbsp;        EntityManager em = null;</b>
+<b class="fc">&nbsp;        if (idTipo == null) {</b>
+<b class="fc">&nbsp;            throw new IllegalArgumentException(&quot;Tipo de sala no encontrado&quot;);</b>
+&nbsp;        }
+&nbsp;        try {
+<b class="fc">&nbsp;            em = getEntityManager();</b>
+<b class="fc">&nbsp;            if (em == null) {</b>
+<b class="fc">&nbsp;                throw new IllegalStateException(&quot;No se encontro el EntityManager&quot;);</b>
+&nbsp;            }
+<b class="fc">&nbsp;        } catch (Exception ex) {</b>
+<b class="fc">&nbsp;            throw new IllegalStateException(&quot;No se encontró el entity manager&quot;, ex);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;
+<b class="fc">&nbsp;        return (T) em.find(tipoDatos, idTipo);</b>
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    public List&lt;T&gt; findRange(int min, int max) {
+&nbsp;
+<b class="fc">&nbsp;        if (min &lt; 0 || max &lt; 0) {</b>
+<b class="fc">&nbsp;            throw new IllegalArgumentException(&quot;Ambos parametros tienen que ser positivos.&quot;);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;
+<b class="fc">&nbsp;        EntityManager em = getEntityManager();</b>
+<b class="fc">&nbsp;        if (em == null) {</b>
+<b class="fc">&nbsp;            throw new IllegalStateException(&quot;El EntityManager no se invoco correctamente.&quot;);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;
+<b class="fc">&nbsp;        CriteriaBuilder cb = em.getCriteriaBuilder();</b>
+<b class="fc">&nbsp;        CriteriaQuery&lt;T&gt; q = cb.createQuery(tipoDatos);</b>
+<b class="fc">&nbsp;        Root&lt;T&gt; raiz = q.from(tipoDatos);</b>
+<b class="fc">&nbsp;        q.select(raiz);</b>
+&nbsp;
+&nbsp;
+<b class="fc">&nbsp;        TypedQuery&lt;T&gt; query = em.createQuery(q);</b>
+<b class="fc">&nbsp;        query.setFirstResult(min);</b>
+<b class="fc">&nbsp;        query.setMaxResults(max);</b>
+&nbsp;
+<b class="fc">&nbsp;        return query.getResultList();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;    public Long count() throws IllegalStateException {
+<b class="fc">&nbsp;        EntityManager em = null;</b>
+&nbsp;
+&nbsp;        try {
+<b class="fc">&nbsp;            em = getEntityManager();</b>
+&nbsp;
+<b class="fc">&nbsp;            if (em == null) {</b>
+<b class="fc">&nbsp;                throw new IllegalStateException(&quot;Error al acceder al repositorio&quot;);</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            CriteriaBuilder cb = em.getCriteriaBuilder();</b>
+<b class="fc">&nbsp;            CriteriaQuery&lt;Long&gt; q = cb.createQuery(Long.class);</b>
+<b class="fc">&nbsp;            Root&lt;T&gt; raiz = q.from(tipoDatos);</b>
+<b class="fc">&nbsp;            q.select(cb.count(raiz));</b>
+&nbsp;
+<b class="fc">&nbsp;            TypedQuery&lt;Long&gt; query = em.createQuery(q);</b>
+<b class="fc">&nbsp;            return query.getSingleResult();</b>
+&nbsp;
+<b class="fc">&nbsp;        } catch (Exception e) {</b>
+<b class="fc">&nbsp;            throw new IllegalStateException(&quot;Error al acceder al repositorio&quot;, e);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    public String imprimirCarnet() {
+<b class="fc">&nbsp;        return &quot;OC22002&quot;;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-10-21 17:39</div>
+</div>
+</body>
+</html>

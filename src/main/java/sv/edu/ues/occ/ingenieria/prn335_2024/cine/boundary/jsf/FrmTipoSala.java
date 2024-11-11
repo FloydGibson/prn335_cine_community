@@ -11,7 +11,7 @@ import sv.edu.ues.occ.ingenieria.prn335_2024.cine.entity.TipoSala;
 @Named
 @ViewScoped
 public class FrmTipoSala extends AbstractPfFrm<TipoSala> {
-
+//esta va por robin
     @Inject
     TipoSalaBean tslBean;
 

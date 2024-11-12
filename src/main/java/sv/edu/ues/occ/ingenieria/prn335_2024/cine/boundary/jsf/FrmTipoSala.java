@@ -41,6 +41,11 @@ public class FrmTipoSala extends AbstractFrm<TipoSala> implements Serializable {
     }
 
     @Override
+    protected FacesContext facesContext() {
+        return null;
+    }
+
+    @Override
     protected TipoSala createNewRegistro() {
         return new TipoSala();
     }

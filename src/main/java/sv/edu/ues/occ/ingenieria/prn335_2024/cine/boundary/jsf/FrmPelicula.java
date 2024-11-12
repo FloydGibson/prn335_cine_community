@@ -43,6 +43,11 @@ public class FrmPelicula extends AbstractFrm<Pelicula> implements Serializable {
     }
 
     @Override
+    protected FacesContext facesContext() {
+        return null;
+    }
+
+    @Override
     protected Pelicula createNewRegistro() {
         return new Pelicula();
     }

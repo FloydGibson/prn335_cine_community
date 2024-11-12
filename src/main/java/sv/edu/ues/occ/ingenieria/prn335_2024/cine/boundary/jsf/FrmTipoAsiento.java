@@ -42,6 +42,11 @@ public class FrmTipoAsiento extends AbstractFrm<TipoAsiento> implements Serializ
     }
 
     @Override
+    protected FacesContext facesContext() {
+        return null;
+    }
+
+    @Override
     protected TipoAsiento createNewRegistro() {
         return new TipoAsiento();
     }

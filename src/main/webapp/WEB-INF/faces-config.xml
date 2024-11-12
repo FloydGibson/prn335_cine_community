@@ -10,12 +10,13 @@
             <supported-locale>en</supported-locale>
             <supported-locale>es</supported-locale>
             <supported-locale>fr</supported-locale>
-
         </locale-config>
         <resource-bundle>
-            <base-name>Traducciones</base-name>
-            <var>abstractpffrm</var>
-        </resource-bundle>
+    <base-name>Traducciones</base-name>
+    <var>abstractpffrm</var>
+    </resource-bundle>
+        
+        
     </application>
 
 </faces-config>

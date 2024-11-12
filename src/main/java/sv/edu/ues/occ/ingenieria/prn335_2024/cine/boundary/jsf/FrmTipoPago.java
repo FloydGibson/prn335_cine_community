@@ -39,6 +39,11 @@ public class FrmTipoPago extends AbstractFrm<TipoPago> implements Serializable {
     }
 
     @Override
+    protected FacesContext facesContext() {
+        return null;
+    }
+
+    @Override
     protected TipoPago createNewRegistro() {
         return new TipoPago();
     }

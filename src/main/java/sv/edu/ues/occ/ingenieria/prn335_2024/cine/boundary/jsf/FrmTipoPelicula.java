@@ -41,6 +41,11 @@ public class FrmTipoPelicula extends AbstractFrm<TipoPelicula> implements Serial
     }
 
     @Override
+    protected FacesContext facesContext() {
+        return null;
+    }
+
+    @Override
     protected TipoPelicula createNewRegistro() {
         return new TipoPelicula();
     }

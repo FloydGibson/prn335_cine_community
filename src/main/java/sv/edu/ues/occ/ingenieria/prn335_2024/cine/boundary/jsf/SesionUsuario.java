@@ -23,9 +23,9 @@ public class SesionUsuario implements Serializable {
 
     @PostConstruct
     public void init() {
-
-        idiomas.put("English", new Locale.Builder().setLanguage("en").build());
-        idiomas.put("Español", new Locale.Builder().setLanguage("es").build());
+        idiomas.put("English", new Locale.Builder().setLanguageTag("en").build());
+        idiomas.put("Français", new Locale.Builder().setLanguageTag("fr").build());
+        idiomas.put("Español", new Locale.Builder().setLanguageTag("es").build());
     }
 
     public Map<String, Locale> getIdiomas() {

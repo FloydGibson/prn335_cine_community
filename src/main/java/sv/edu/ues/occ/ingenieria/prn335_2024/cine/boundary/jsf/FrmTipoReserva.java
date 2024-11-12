@@ -43,6 +43,11 @@ public class FrmTipoReserva extends AbstractFrm<TipoReserva> implements Serializ
     }
 
     @Override
+    protected FacesContext facesContext() {
+        return null;
+    }
+
+    @Override
     protected TipoReserva createNewRegistro() {
         return new TipoReserva();
     }

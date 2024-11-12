@@ -26,6 +26,8 @@ public abstract class AbstractFrm<T> implements Serializable {
 
     protected abstract Object getId(T object);
 
+    protected abstract FacesContext facesContext();
+
     protected abstract T createNewRegistro();
 
     protected abstract AbstractDataPersistence<T> getDataBean();
@@ -211,4 +213,15 @@ public abstract class AbstractFrm<T> implements Serializable {
         }
         return 0;
     }
+
+
+    public void setEstado(ESTADO_CRUD estado) {
+        this.estado = estado;
+    }
+
+    public void setModelo(LazyDataModel<T> modelo) {
+        this.modelo = modelo;
+    }
+
+
 }

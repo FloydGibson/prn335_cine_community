@@ -86,6 +86,11 @@ public class FrmPeliculaCaracteristica extends AbstractFrm<PeliculaCaracteristic
     }
 
     @Override
+    protected FacesContext facesContext() {
+        return null;
+    }
+
+    @Override
     protected  PeliculaCaracteristica createNewRegistro(){
         PeliculaCaracteristica pc = new PeliculaCaracteristica();
         if (idPelicula != null) {
@@ -165,4 +170,10 @@ public class FrmPeliculaCaracteristica extends AbstractFrm<PeliculaCaracteristic
                 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Advertencia", "Valor ingresado inválido."));
 
     }
+
+    public List<TipoPelicula> getTipoPeliculaList() {
+        return tipoPeliculasList;
+    }
+
+
 }

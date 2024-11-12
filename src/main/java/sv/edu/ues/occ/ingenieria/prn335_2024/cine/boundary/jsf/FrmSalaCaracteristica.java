@@ -83,6 +83,11 @@ public class FrmSalaCaracteristica extends AbstractFrm<SalaCaracteristica> imple
     }
 
     @Override
+    protected FacesContext facesContext() {
+        return null;
+    }
+
+    @Override
     protected  SalaCaracteristica createNewRegistro(){
         SalaCaracteristica pc = new SalaCaracteristica();
         if (idSala != null) {

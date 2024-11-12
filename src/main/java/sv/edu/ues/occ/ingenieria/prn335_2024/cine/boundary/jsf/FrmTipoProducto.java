@@ -40,6 +40,11 @@ public class FrmTipoProducto extends AbstractFrm<TipoProducto> implements Serial
     }
 
     @Override
+    protected FacesContext facesContext() {
+        return null;
+    }
+
+    @Override
     protected TipoProducto createNewRegistro() {
         return new TipoProducto();
     }

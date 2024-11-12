@@ -87,8 +87,15 @@ public class FrmMenu implements Serializable {
                 .command("#{frmMenu.navegar('Sala.jsf')}")
                 .build()
                 ;
+        DefaultMenuItem Sucursal = DefaultMenuItem.builder()
+                .value("Sucursal")
+                .ajax(true)
+                .command("#{frmMenu.navegar('Sucursal.jsf')}")
+                .build();
+
         cine.getElements().add(Pelicula);
         cine.getElements().add(Sala);
+        cine.getElements().add(Sucursal);
 
         model.getElements().add(tipos);
         model.getElements().add(cine);

@@ -49,6 +49,11 @@ public class FrmSala extends AbstractFrm<Sala> implements Serializable {
     }
 
     @Override
+    protected FacesContext facesContext() {
+        return null;
+    }
+
+    @Override
     protected Sala createNewRegistro() {
         return new Sala();
     }

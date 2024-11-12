@@ -18,13 +18,7 @@ public abstract class AbstractDataPersistence<T> {
         this.tipoDatos = tipoDatos;
     }
 
-    /*
-    Almacena el registro en el repositorio
-    param entity registro a almacenar
-    ex1 acces no se puede acceder al repo
-    Argument si el registro es nulo
-    Generar javadoc?
-     */
+
     public void create(T entity) throws IllegalArgumentException, IllegalStateException {
 
         EntityManager em = null;
@@ -37,7 +31,7 @@ public abstract class AbstractDataPersistence<T> {
         try {
             em.persist(entity);
         } catch (Exception e) {
-            // excepcion java lang, no requiere la dependencia
+
             throw new IllegalStateException("Error acceder repositorio", e);
         }
     }

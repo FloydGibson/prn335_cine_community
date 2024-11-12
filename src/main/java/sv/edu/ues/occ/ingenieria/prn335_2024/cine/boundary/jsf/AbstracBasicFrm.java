@@ -5,12 +5,13 @@ import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.event.ActionEvent;
 import sv.edu.ues.occ.ingenieria.prn335_2024.cine.control.AbstractDataPersistence;
-import sv.edu.ues.occ.ingenieria.prn335_2024.cine.entity.TipoSala;
+
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.stream.Collectors;
 
+//esta va para robin
 public abstract class AbstracBasicFrm<T> implements Serializable {
     protected T registro;
     protected ESTADO_CRUD estado;
